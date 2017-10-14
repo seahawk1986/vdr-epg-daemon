@@ -65,8 +65,8 @@ int cCurl::create()
 
       if (curl_global_init(CURL_GLOBAL_SSL /*CURL_GLOBAL_ALL*/) != 0)
       {
-         tell(0, "Error, something went wrong with curl_global_init()");
-         return fail;
+	 tell(0, "Error, something went wrong with curl_global_init()");
+	 return fail;
       }
 
       curlInitialized = yes;
@@ -95,8 +95,8 @@ int cCurl::init(const char* httpproxy)
    {
       if (!(handle = curl_easy_init()))
       {
-         tell(0, "Could not create new curl instance");
-         return fail;
+	 tell(0, "Could not create new curl instance");
+	 return fail;
       }
    }
 
@@ -108,7 +108,7 @@ int cCurl::init(const char* httpproxy)
       curl_easy_setopt(handle, CURLOPT_PROXY, httpproxy);   // Specify HTTP proxy
    }
 
-   curl_easy_setopt(handle, CURLOPT_HTTPHEADER, 0);
+   curl_easy_setopt(handle, CURLOPT_HTTPHEADER, NULL);
    curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, collect_data);
    curl_easy_setopt(handle, CURLOPT_WRITEDATA, 0);                        // Set option to write to string
    curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, yes);
@@ -138,13 +138,16 @@ int cCurl::exit()
 // Get Url
 //***************************************************************************
 
-int cCurl::GetUrl(const char* url, std::string* sOutput, const std::string& sReferer)
+int cCurl::GetUrl(const char* url, std::string* sOutput, const std::string& sReferer, struct curl_slist *headerlist)
 {
    CURLcode res;
 
-   init();
+   init();                                                // this resets most options
 
    curl_easy_setopt(handle, CURLOPT_URL, url);            // Set the URL to get
+
+							  //
+   curl_easy_setopt(handle, CURLOPT_HTTPHEADER, headerlist); // add the header
 
    if (sReferer != "")
       curl_easy_setopt(handle, CURLOPT_REFERER, sReferer.c_str());

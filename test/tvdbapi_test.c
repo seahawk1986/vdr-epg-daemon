@@ -101,10 +101,6 @@ int searchSeries(const string &token, const string &seriesName, const string &la
 
 int main(int argc, char *argv[])
 {
-	if (argc > 1) {
-		searchArg = argv[1];
-		std::cout << "argument was: " << searchArg << std::endl;
-	}
 	string token = "";
 	string apikey = "E9DBB94CA50832ED";
 	if (login(apikey, token)) {
@@ -116,7 +112,13 @@ int main(int argc, char *argv[])
 		cout << "new token: " << token << '\n';
 
 
-	if (searchSeries(token, "Mit Schirm, Charme und Melone")) {
+	if (argc > 1) {
+		searchArg = argv[1];
+		std::cout << "argument was: " << searchArg << std::endl;
+	} else {
+		searchArg = "Mit Schirm, Charme und Melone";
+	}
+	if (searchSeries(token, searchArg)) {
 		cout << "successfull search" << '\n';
 	} else {
 		cout << "search failed" << '\n';

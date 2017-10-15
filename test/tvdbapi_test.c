@@ -6,8 +6,48 @@
 #include "../tools/stringhelpers.h"
 #include "tvdbapi_test.h"
 
-const string api_url = "https://api.thetvdb.com";
+const static string api_url = "https://api.thetvdb.com";
 string searchArg;
+
+string jsonSeriesExample = R"foo(
+{
+  "data": [
+    {
+      "aliases": [],
+      "banner": "graphical/71020-g.jpg",
+      "firstAired": "1961-01-07",
+      "id": 71020,
+      "network": "ITV",
+      "overview": "John Steed ist Geheimagent im Auftrag Ihrer Majestät und mit besonders schwierigen Aufgaben der Verbrechensbekämpfung betraut. Ein simpler Mord ist das Geringste, was ihn beschäftigt, eher geht es um größenwahnsinnige Wissenschaftler, exzentrische Verschwörer, wirre Fanatiker und generell das Streben nach Weltherrschaft. Zur Seite steht ihm Emma Peel, eine Karate-Lady, die ihre Kunst im Kampf gegen Ganoven regelmäßig einsetzt. Steed selbst benutzt seinen Regenschirm als Waffe, in dem ein Degen versteckt ist, und macht selbst in diesen Fällen eine elegante Figur. Er fährt einen Bentley, trägt stets einen maßgeschneiderten dunklen Anzug und eine meist mit Eisen gefütterte Melone und legt Wert darauf, dass sein Kaffee nur gegen den Uhrzeigersinn umgerührt wird. Emma Peel fährt einen Lotus Elan, trägt außergewöhnliche, eng anliegende, figurbetonende Kleider und kniehohe Lederstiefel. Auch ihre Arbeitsweise ist eher unkonventionell.",
+      "seriesName": "Mit Schirm, Charme und Melone",
+      "status": "Ended"
+    },
+    {
+      "aliases": [
+        "Mit Schirm, Charme und Melone 1976"
+      ],
+      "banner": "graphical/4010-g.jpg",
+      "firstAired": "1976-10-01",
+      "id": 76360,
+      "network": "ITV1",
+      "overview": "John Steed ist wieder da. Zusammen mit seinen beiden neuen Partnern Mike Gambit und Purdey macht er sich erneut auf die Jagd nach Doppelagenten und \"Diabolical Masterminds\". ",
+      "seriesName": "Mit Schirm, Charme und Melone (1976)",
+      "status": "Ended"
+    }
+  ]
+}
+)foo";
+
+bool parseJSON(const string &data, json_t **result)
+{
+    json_error_t error;
+    *result = json_loads(data.c_str(), 0, &error);
+    if (!result) {
+	fprintf(stderr, "error on line %d: %s", error.line, error.text);
+        return false;
+    }
+    return true;
+}
 
 bool login(const string &apikey, string &token)
 {
@@ -71,7 +111,7 @@ bool refreshToken(string &token)
 
 }
 
-int searchSeries(const string &token, const string &seriesName, const string &language)
+int searchSeries(const string &token, const string &seriesName, string &jsonResult, const string &language)
 {
 	int seriesID = 0;
 	string seriesJSON;
@@ -93,10 +133,43 @@ int searchSeries(const string &token, const string &seriesName, const string &la
 	if (curl.GetUrl(url.str().c_str(), &seriesJSON, (string)"", headerlist)) {
 		//parseSeriesJSON(seriesJSON);
 		cout << "Series data: " << seriesJSON << '\n';
+                jsonResult = seriesJSON;
 		return true;
 	} else {
 		return false;
 	}
+}
+
+int getSeriesID(json_t **seriesData)
+{
+	int seriesID = 0;
+        json_t *json_data, *json_array, *json_field;
+        if (!json_is_object(*seriesData)) {
+		cout << "got no json object at top level!" << '\n';
+                json_decref(*seriesData);
+		return seriesID;
+	}
+	json_array = json_object_get(*seriesData, "data");
+        if (!json_array) {
+		cout << "error when fetching data" << '\n';
+                json_decref(*seriesData);
+		return seriesID;
+	}
+        json_data = json_array_get(json_array, 0);
+        if (!json_is_object(json_data)) {
+		cout << "error when fetcing first element of array" << '\n';
+                json_decref(*seriesData);
+		return seriesID;
+	}
+	json_field = json_object_get(json_data, "id");
+        if (!json_field) {
+		cout << "error when fetching id" << '\n';
+                json_decref(*seriesData);
+		return seriesID;
+	}
+        seriesID = json_integer_value(json_field);
+        return seriesID;
+
 }
 
 int main(int argc, char *argv[])
@@ -118,11 +191,22 @@ int main(int argc, char *argv[])
 	} else {
 		searchArg = "Mit Schirm, Charme und Melone";
 	}
-	if (searchSeries(token, searchArg)) {
-		cout << "successfull search" << '\n';
-	} else {
+        string jsonData;
+	if (!searchSeries(token, searchArg, jsonData)) {
 		cout << "search failed" << '\n';
+		return 1;
 	}
+        json_t *root;
+        cout << "Parsing json string:" << '\n' << jsonData << '\n';
+        bool success = parseJSON(jsonData, &root);
+        if (!success) {
+		cout << "error when parsing JSON string" << '\n';
+		return 1;
+	}
+	int seriesID;
+	seriesID = getSeriesID(&root);
+        json_decref(root);
+	cout << "SeriesID for " << searchArg << " is " << seriesID << '\n';
 	return 0;
 }
 

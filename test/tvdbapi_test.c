@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <jansson.h>
+#include "../levenshtein.h"
 #include "../lib/curl.h"
 #include "../tools/stringhelpers.h"
 #include "tvdbapi_test.h"
@@ -62,6 +63,7 @@ bool login(const string &apikey, string &token)
 
    string data = "";
    responseCode = curl.DoPost(login_url, login_data, &data, httpResponse, (string)"", headerlist);
+   curl_slist_free_all(headerlist);
    if (responseCode) {
       return parseToken(data, token);
    } else {
@@ -101,7 +103,9 @@ bool refreshToken(string &token)
    string referrer = "";
 
    string data = "";
-   if (curl.GetUrl(url.c_str(), &data, referrer, headerlist)) {
+   int res = curl.GetUrl(url.c_str(), &data, referrer, headerlist);
+   curl_slist_free_all(headerlist);
+   if (res) {
       // cout << "new token data: " << data << '\n';
       return parseToken(data, token);
    } else {
@@ -114,26 +118,14 @@ bool refreshToken(string &token)
 int searchSeries(const string &token, const string &seriesName, string &jsonResult, const string &language)
 {
    int seriesID = 0;
-   string seriesJSON;
    stringstream url;
 
    char* escName = curl.EscapeUrl(seriesName.c_str());
    url << api_url << "/search/series?name=" << escName;
    curl.Free(escName);
 
-   struct curl_slist *headerlist = NULL;
-   headerlist = curl_slist_append(headerlist, "Accept: application/json");
-
-   string lang_opt = "Accept-Language: " + language;
-   headerlist = curl_slist_append(headerlist, lang_opt.c_str());
-
-   string auth_token = "Authorization: Bearer " + token;
-   headerlist = curl_slist_append(headerlist, auth_token.c_str());
-
-   if (curl.GetUrl(url.str().c_str(), &seriesJSON, (string)"", headerlist)) {
-      //parseSeriesJSON(seriesJSON);
-      cout << "Series data: " << seriesJSON << '\n';
-                jsonResult = seriesJSON;
+   if (getRequest(token, url.str(), jsonResult, language)) {
+      cout << "Search Series by name got Series data: " << jsonResult << '\n';
       return true;
    } else {
       return false;
@@ -142,10 +134,102 @@ int searchSeries(const string &token, const string &seriesName, string &jsonResu
 
 bool getSeries(const string &token, int seriesID, string &jsonResult, const string &language)
 {
-   string seriesJSON;
    stringstream url;
    url << api_url << "/series/" << seriesID;
 
+   if (getRequest(token, url.str(), jsonResult, language)) {
+      //parseSeriesJSON(seriesJSON);
+      cout << "Series data:\n" << jsonResult << '\n';
+      return true;
+   } else {
+      return false;
+   }
+}
+
+bool getEpisodes(const string &token, int seriesID, string &jsonResult, const string &language)
+{
+   // get Episodes for a given seriesID
+   stringstream url;
+
+   string jsonPage;
+   int nextPage = 1;
+   json_auto_t *links, *pageData, *next_field;
+   json_auto_t *root, *data = json_array();
+   size_t dataSize;
+   while (nextPage > 0) {
+      cout << "fetching page " << nextPage << '\n';
+      url << api_url << "/series/" << seriesID << "/episodes?page=" << nextPage;
+      if (getRequest(token, url.str(), jsonPage, language)) {
+         //cout << "Series data:\n" << jsonPage << '\n';
+         if (parseJSON(jsonPage, &root)) {
+            int index;
+            json_auto_t *value;
+            pageData = json_object_get(root, "data"); 
+            json_array_foreach(pageData, index, value) {
+               json_array_append(data, value);
+            }
+            links = json_object_get(root, "links"); 
+            if (!links) {
+               cout << "no links element found" << '\n';
+               break;
+            }
+            next_field = json_object_get(links, "next");
+            if (!next_field) {
+               cout << "no next element found" << '\n';
+               break;
+            }
+            nextPage = json_integer_value(next_field);
+            cout << "next Page is " << nextPage << '\n';
+         } else {
+            nextPage = 0;
+            break;
+         }
+      } else {
+         break;
+      }
+      url.str(std::string());
+   }
+   if (data) {
+      cout << "got " << json_array_size(data) << " episodes" << '\n';
+      jsonResult = json_dumps(data, 0);
+      return true;
+   } else {
+      return false;
+   }
+}
+
+bool getActors(const string &token, int seriesID, string &jsonResult, const string &language)
+{
+   // get actors for a seriesID
+   // TODO Parse array objects into Actor Objects
+   stringstream url;
+   url << api_url << "/series/" << seriesID << "actors";
+
+   if (getRequest(token, url.str(), jsonResult, language)) {
+      cout << "Series data:\n" << jsonResult << '\n';
+      return true;
+   } else {
+      return false;
+   }
+}
+   
+bool getImages(const string &token, int seriesID, string &jsonResult, const string &language)
+{
+   // returns data for the number of available images of each type
+   stringstream url;
+   url << api_url << "/series/" << seriesID << "images";
+
+   if (getRequest(token, url.str(), jsonResult, language)) {
+      cout << "Series data:\n" << jsonResult << '\n';
+      return true;
+   } else {
+      return false;
+   }
+}
+
+bool getRequest(const string &token, const string &url, string &jsonResult, const string &language)
+{
+   // wrapper to handle get requests with the needed headers
    struct curl_slist *headerlist = NULL;
    headerlist = curl_slist_append(headerlist, "Accept: application/json");
 
@@ -155,10 +239,10 @@ bool getSeries(const string &token, int seriesID, string &jsonResult, const stri
    string auth_token = "Authorization: Bearer " + token;
    headerlist = curl_slist_append(headerlist, auth_token.c_str());
 
-   if (curl.GetUrl(url.str().c_str(), &seriesJSON, (string)"", headerlist)) {
-      //parseSeriesJSON(seriesJSON);
-      cout << "Series data: " << seriesJSON << '\n';
-                jsonResult = seriesJSON;
+   int res = curl.GetUrl(url.c_str(), &jsonResult, (string)"", headerlist);
+   curl_slist_free_all(headerlist);
+   if (res) {
+      // cout << "get request returned:\n" << jsonResult << '\n';
       return true;
    } else {
       return false;
@@ -167,50 +251,71 @@ bool getSeries(const string &token, int seriesID, string &jsonResult, const stri
 
 int getSeriesID(json_t **seriesData, string &seriesName)
 {
+   // return the series with the name nearest to seriesName
    int seriesID = 0;
-        json_t *json_data, *json_array, *json_field;
-        if (!json_is_object(*seriesData)) {
+   int lv_distance = 0;
+   int max_dist = 0;
+   const char *json_seriesName = NULL;
+   json_auto_t *json_data, *json_array, *json_field, *json_seriesName_field;
+   if (!json_is_object(*seriesData)) {
       cout << "got no json object at top level!" << '\n';
-                json_decref(*seriesData);
       return seriesID;
    }
    json_array = json_object_get(*seriesData, "data");
-        if (!json_array) {
+   if (!json_array) {
       cout << "error when fetching data" << '\n';
-                json_decref(*seriesData);
       return seriesID;
    }
-        json_data = json_array_get(json_array, 0);
-        if (!json_is_object(json_data)) {
-      cout << "error when fetcing first element of array" << '\n';
-                json_decref(*seriesData);
-      return seriesID;
-   }
-   json_field = json_object_get(json_data, "id");
-        if (!json_field) {
-      cout << "error when fetching id" << '\n';
-                json_decref(*seriesData);
-      return seriesID;
-   }
-        seriesID = json_integer_value(json_field);
-        /* TODO: return the best match for the original search string
-   */
-        return seriesID;
+   size_t index;
+   json_auto_t *value;
+   int bestMatch = 100;
+   json_array_foreach(json_array, index, value) {
+      json_data = json_array_get(json_array, index);
+      if (!json_is_object(json_data)) {
+         cout << "error when fetcing element of array" << '\n';
+         continue;
+      }
+      json_seriesName_field = json_object_get(json_data, "seriesName");
+      if (!json_seriesName_field) {
+          cout << "error when fetching seriesName_field" << '\n';
+          cout << "data was " << json_dumps(json_data, 0) << '\n';
+      }
+      json_seriesName = json_string_value(json_seriesName_field);
+      if (!json_seriesName) {
+         cout << "error when fetching seriesName" << '\n';
+         continue;
+      }
 
+      lv_distance = lvDistance(seriesName, json_seriesName, 20, max_dist);
+      cout << "Levenshtein distance between " << seriesName << " and " << json_seriesName << " is " << lv_distance << '\n';
+      if (lv_distance < bestMatch) {
+         bestMatch = lv_distance;
+
+         json_field = json_object_get(json_data, "id");
+         if (!json_field) {
+            cout << "error when fetching id" << '\n';
+            continue;
+         }
+         seriesID = json_integer_value(json_field);
+         } 
+   }
+   return seriesID;
 }
 
 int main(int argc, char *argv[])
 {
    string token = "";
    string apikey = "E9DBB94CA50832ED";
+   /*
    if (login(apikey, token)) {
       cout << "token: " << token << "\n";
    } else {
       cout << "login failed" << std::endl;
    }
+   */
+   token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDgxNDQ0NjUsImlkIjoiVFZTY3JhcHBlciIsIm9yaWdfaWF0IjoxNTA4MDU4MDY1fQ.FX0bYJg2eOJ7O8J4hfodgmSwc3cz5c93-bV0TFB19NjOBTLbHNZDkB9axg30arU0IcnZShrX0ComEj_VVJ1ktcxqNBa4gLyoZMoUYj_UsZU-Q7VdeUorlNRH7FlhIRk8Yt3JJ7whvbY5g7OIUz25aezxF15a5Cby2AcFx2iDSIFn2atjbUKOuVClBXn5s7ZEH2T8o_yu-9VS4uiamGJCU2_WqHI8v-Gl8o9GVbD8nVTQPKeRaFpD9mstXQg62S9-BFMQXiVlGH-gkGrIQsunaffyrDbHURgQhfshFemJClZGXt0p1uXTmujt9fRNE_3DjZrb3UdwXYnm-2EZOfYlqw";
    if (refreshToken(token))
       cout << "new token: " << token << '\n';
-
 
    if (argc > 1) {
       searchArg = argv[1];
@@ -223,10 +328,10 @@ int main(int argc, char *argv[])
       cout << "search failed" << '\n';
       return 1;
    }
-        json_t *root;
-        cout << "Parsing json string:" << '\n' << jsonData << '\n';
-        bool success = parseJSON(jsonData, &root);
-        if (!success) {
+   json_auto_t *root;
+   cout << "Parsing json string:" << '\n' << jsonData << '\n';
+   bool success = parseJSON(jsonData, &root);
+   if (!success) {
       cout << "error when parsing JSON string" << '\n';
       return 1;
    }
@@ -234,7 +339,11 @@ int main(int argc, char *argv[])
    seriesID = getSeriesID(&root, searchArg);
         json_decref(root);
    cout << "SeriesID for " << searchArg << " is " << seriesID << '\n';
-   getSeries(token, seriesID, jsonData);
+   if (getSeries(token, seriesID, jsonData)) {
+      string episodeArray;
+      getEpisodes(token, seriesID, episodeArray);
+      cout << "episoden:\n" << episodeArray << '\n';
+   }
    return 0;
 }
 

@@ -9,4 +9,4 @@ CFLAGS   += $(shell mysql_config --include)
 
 all:
 	$(MAKE) -C ../ 
-	g++ -g tvdbapi_test.cpp -o test $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) $(mysql_config --libs_r) -lcrypto -larchive -lxslt -luuid
+	g++ -g tvdbapi_test.cpp ../levenshtein.o  -o test $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) $(mysql_config --libs_r) -lcrypto -larchive -lxslt -luuid

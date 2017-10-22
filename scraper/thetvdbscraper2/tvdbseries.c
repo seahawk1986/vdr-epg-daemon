@@ -1,32 +1,7 @@
 
-#include "../../lib/curl.h"
 #include "tvdbseries.h"
 
 using namespace std;
-
-cTVDBSeries::cTVDBSeries(int ID, string language, string apiKey, cTVDBMirrors *mirrors) {
-    this->language = language;
-    this->apiKey = apiKey;
-    this->mirrors = mirrors;
-    seriesID = ID;
-    name = "";
-    banner = "";
-    fanart = "";
-    poster = "";
-    overview = "";
-    firstAired = "";
-    network = "";
-    imbdid = "";
-    genre = "";
-    rating = 0.0;
-    status = "";
-    currentEpisode = 0;
-    currentActor = 0;
-    currentFanart = 0;
-    currentPoster = 0;
-    currentSeasonPoster = 0;
-    currentBanner = 0;
-}
 
 cTVDBSeries::~cTVDBSeries() {
     for(std::vector<cTVDBEpisode*>::const_iterator it = episodes.begin(); it != episodes.end(); it++) {
@@ -56,17 +31,84 @@ cTVDBSeries::~cTVDBSeries() {
 }
 
 bool cTVDBSeries::ReadSeries(void) {
-    stringstream url;
-    url << mirrors->GetMirrorXML() << "/api/" << apiKey << "/series/" << seriesID << "/all/" << language << ".xml";
-    string seriesXML;
-    if (curl.GetUrl(url.str().c_str(), &seriesXML)) {
-        ParseXML(seriesXML);
-        return true;
-    }
-    return false;
+   // parse series data and all episodes of a series
+
+   /*
+     // OLD API
+     stringstream url;
+     url << mirrors->GetMirrorXML() << "/api/" << apiKey << "/series/" << seriesID << "/all/" << language << ".xml";
+     string seriesXML;
+     if (curl.GetUrl(url.str().c_str(), &seriesXML)) {
+         ParseXML(seriesXML);
+         return true;
+     }
+     return false;
+   */
+  return GetSeries() && GetEpisodes();
+}
+
+bool cTVDBSeries::GetSeries(void)
+{
+   string seriesJSONString;
+   json_auto_t *root, *seriesData;
+   string url = tvdbapi.apiUrl + "";
+
+   if (tvdbapi.GetRequest(url, seriesJSONString)) {
+      //cout << "Series data:\n" << jsonPage << '\n';
+      if (tvdbapi.ParseJSON(seriesJSONString, &root)) {
+         seriesData = json_object_get(root, "data"); 
+         return ParseSeries(&seriesData);
+      }
+   }
+   return false;
+}
+
+bool cTVDBSeries::GetEpisodes(void)
+{
+   int nextPage = 1;
+   string jsonPage;
+   json_auto_t *links, *pageData, *next_field;
+   json_auto_t *root = json_array();
+   while (nextPage > 0) {
+      cout << "fetching page " << nextPage << '\n';
+      string url = tvdbapi.apiUrl + string("/series/") + to_string(seriesID) + string("/episode?page") + to_string(nextPage);
+      if (tvdbapi.GetRequest(url, jsonPage)) {
+         //cout << "Series data:\n" << jsonPage << '\n';
+         if (tvdbapi.ParseJSON(jsonPage, &root)) {
+            pageData = json_object_get(root, "data"); 
+
+            // call ParseEpisodes for each page
+            ParseEpisodes(&pageData);
+
+            links = json_object_get(root, "links"); 
+
+            if (!links) {
+               cout << "no links element found" << '\n';
+               break;
+            }
+
+            next_field = json_object_get(links, "next");
+
+            if (!next_field) {
+               cout << "no next element found" << '\n';
+               break;
+            }
+
+            nextPage = json_integer_value(next_field);
+            cout << "next Page is " << nextPage << '\n';
+         } else {
+            return false;
+         }
+      } else {
+         return false;
+      }
+   }
+   return true;
 }
 
 void cTVDBSeries::ReadMedia(void) {
+    // old API
+    /*
     stringstream url;
     url << mirrors->GetMirrorXML() << "/api/" << apiKey << "/series/" << seriesID << "/banners.xml";
     string bannersXML;
@@ -74,19 +116,48 @@ void cTVDBSeries::ReadMedia(void) {
         cTVDBSeriesMedia med(language, mirrors);
         med.ParseXML(bannersXML, &banners, &fanarts, &posters, &seasonPosters);
     }
+    */
+    // END OLD API
 }
 
 void cTVDBSeries::ReadActors(void) {
+  // OLD API
+  /*
     stringstream url;
     url << mirrors->GetMirrorXML() << "/api/" << apiKey << "/series/" << seriesID << "/actors.xml";
     string actorsXML;
+
     if (curl.GetUrl(url.str().c_str(), &actorsXML)) {
         cTVDBActors act(language, mirrors);
         act.ParseXML(actorsXML, &actors);
     }
+  */
+    // END OLD API
+
+    string url = tvdbapi.apiUrl + string("/series/") + to_string(seriesID) + string("actors");
+
+    string jsonStringResult;
+    if (tvdbapi.GetRequest(url, jsonStringResult)) {
+      cout << "Series data:\n" << jsonStringResult << '\n';
+    }
+}
+
+void ParseActor(string json) {
+
+}
+
+void cTVDBSeries::ParseEpisodes(json_t **episodeArray)
+{
+   size_t index;
+   json_auto_t *episode;
+
+   json_array_foreach(*episodeArray, index, episode) {
+      // for each episode do
+   }
 }
 
 void cTVDBSeries::ParseXML(string xml) {
+  /*
     xmlDoc *doc = xmlReadMemory(xml.c_str(), xml.size(), "noname.xml", NULL, 0);
     if (doc == NULL)
         return;
@@ -104,15 +175,69 @@ void cTVDBSeries::ParseXML(string xml) {
         if ((cur_node->type == XML_ELEMENT_NODE) && !xmlStrcmp(cur_node->name, (const xmlChar *)"Series")) {
             ReadSeriesData(doc, cur_node->children);
         } else if ((cur_node->type == XML_ELEMENT_NODE) && !xmlStrcmp(cur_node->name, (const xmlChar *)"Episode")) {
-            cTVDBEpisode *episode = new cTVDBEpisode();
+            cTVDBEpisode *episode = new cTVDBEpisode(tvdbapi);
             episode->ReadEpisodeFromXML(doc, cur_node->children, mirrors);
             episodes.push_back(episode);
         } 
     }
     xmlFreeDoc(doc);
+  */
 }
 
+bool cTVDBSeries::ParseSeries(json_t **data) {
+   if (!json_is_object(*data))
+      return false;
+
+   // firstAired
+   SetClassValue(string("firstAired"), data, firstAired);
+   SetClassValue("seriesName", data, name);
+   SetClassValue("banner", data, banner);
+   // TODO: concat array of genres to "|foo|bar|baz|" as string genre
+   genre = "";
+   // TODO get fanart from
+   // https://api.thetvdb.com/series/{seriesID}/images/query?keyType=fanart
+   fanart = "";
+   // TODO get poster from
+   // https://api.thetvdb.com/series/{seriesID}/images/query?keyType=poster
+   poster = "";
+   SetClassValue(string("imdbId"), data, imbdid);
+   SetClassValue(string("rating"), data, rating);
+   SetClassValue(string("status"), data, status);
+   SetClassValue(string("overview"), data, overview);
+   SetClassValue(string("network"), data, network);
+   SetInt2IntClassValue(string("lastUpdated"), data, lastUpdated);
+   
+   return true;
+}
+
+void cTVDBSeries::SetClassValue(const string &fieldName, json_t **data, string &result)
+{
+   json_auto_t *field;
+   field = json_object_get(*data, fieldName.c_str());
+   if (json_is_string(field))
+     result = json_string_value(field);
+}
+
+void cTVDBSeries::SetClassValue(const string &fieldName, json_t **data, float &result)
+{
+   json_auto_t *field;
+   field = json_object_get(*data, fieldName.c_str());
+   if (json_is_string(field))
+     result = atof(json_string_value(field));
+}
+
+void cTVDBSeries::SetInt2IntClassValue(const string &fieldName, json_t **data, int &result)
+{
+   json_auto_t *field;
+   field = json_object_get(*data, fieldName.c_str());
+   if (json_is_integer(field))
+     result = json_integer_value(field);
+}
+
+
 void cTVDBSeries::ReadSeriesData(xmlDoc *doc, xmlNode *node) {
+    // OLD API
+  /*
     xmlNode *cur_node = NULL;
     xmlChar *node_content;
     for (cur_node = node; cur_node; cur_node = cur_node->next) {
@@ -148,6 +273,7 @@ void cTVDBSeries::ReadSeriesData(xmlDoc *doc, xmlNode *node) {
             xmlFree(node_content);
         }
     }
+  */
 }
 
 cTVDBEpisode *cTVDBSeries::GetEpisode(void) {

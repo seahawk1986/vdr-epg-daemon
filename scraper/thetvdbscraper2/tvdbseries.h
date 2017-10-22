@@ -7,10 +7,12 @@
 #include <vector>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+#include <jansson.h>
 #include "tvdbmirrors.h"
 #include "tvdbactor.h"
 #include "tvdbmedia.h"
 #include "tvdbepisode.h"
+#include "thetvdbapi.h"
 
 using namespace std;
 
@@ -18,8 +20,7 @@ using namespace std;
 
 class cTVDBSeries {
 private:
-    string apiKey;
-    cTVDBMirrors *mirrors;
+    cTVDBApi &tvdbapi;
     string language;
     vector<cTVDBEpisode*> episodes;
     vector<cTVDBActor*> actors;
@@ -33,14 +34,41 @@ private:
     int currentPoster;
     int currentSeasonPoster;
     int currentBanner;
+    bool ParseSeries(json_t **data);
+    void ParseEpisodes(json_t **data);
     void ParseXML(string xml);
     void ReadSeriesData(xmlDoc *doc, xmlNode *node);
 public:
-    cTVDBSeries(int ID, string language, string apiKey, cTVDBMirrors *mirrors);
+    cTVDBSeries(int ID, cTVDBApi &tvdbapi)
+      : tvdbapi(tvdbapi) {
+            seriesID = ID;
+            name = "";
+            banner = "";
+            fanart = "";
+            poster = "";
+            overview = "";
+            firstAired = "";
+            network = "";
+            imbdid = "";
+            genre = "";
+            rating = 0.0;
+            status = "";
+            currentEpisode = 0;
+            currentActor = 0;
+            currentFanart = 0;
+            currentPoster = 0;
+            currentSeasonPoster = 0;
+            currentBanner = 0;
+    }
     virtual ~cTVDBSeries(void);
     bool ReadSeries(void);
+    bool GetSeries(void);
+    bool GetEpisodes(void);
     void ReadMedia(void);
     void ReadActors(void);
+    void SetClassValue(const string &fieldName, json_t **data, string &result);
+    void SetClassValue(const string &fieldName, json_t **data, float &result);
+    void SetInt2IntClassValue(const string &fieldName, json_t **data, int &result);
     cTVDBEpisode *GetEpisode(void);
     cTVDBActor *GetActor(void);
     cTVDBFanart *GetFanart(void);

@@ -11,6 +11,7 @@
 #include <libxml/tree.h>
 #include "tvdbmirrors.h"
 #include "tvdbseries.h"
+#include "tvdbepisode.h"
 #include "thetvdbapi.h"
 
 using namespace std;
@@ -45,7 +46,7 @@ public:
     cTVDBSeries *ScrapInitial(std::string seriesName);
     bool GetUpdatedSeriesandEpisodes(set<int> *updatedSeries, set<int> *updatedEpisodes, int lastScrap);
     cTVDBSeries *GetSeries(int seriesID);
-    cTVDBEpisode *GetEpisode(int episodeID); 
+    cTVDBEpisode *GetEpisode(int episodeID, cTVDBApi &tvdbapi); 
 };
 
 #endif //__TVSCRAPER_TVDBSCRAPER_H

@@ -151,9 +151,10 @@ int main(int argc, char *argv[])
 {
    string token = "";
    string apikey = "E9DBB94CA50832ED";
-   //   cTVDBApi tvdbapi;
+   cTVDBApi tvdbapi;
    cTVDBScraper scraper;
 
+   tvdbapi.Login(apikey);
    if (!scraper.Connect()) {
        std:cout << "Login failed" << '\n';
    return 1;

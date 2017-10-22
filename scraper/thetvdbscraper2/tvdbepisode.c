@@ -12,6 +12,7 @@
 
 using namespace std;
 
+/*
 cTVDBEpisode::cTVDBEpisode(void) {
     id = 0;
     seriesID = 0;
@@ -31,11 +32,11 @@ cTVDBEpisode::cTVDBEpisode(void) {
     seasonId = 0;
     lastUpdated = 0;
 }
+*/
 
-cTVDBEpisode::cTVDBEpisode(int ID, string language, string apiKey, cTVDBMirrors *mirrors) {
-    this->language = language;
-    this->apiKey = apiKey;
-    this->mirrors = mirrors;
+/*
+cTVDBEpisode::cTVDBEpisode(int ID, cTVDBApi &tvdbapi) {
+    this->tvdbapi = tvdbapi;
     id = ID;
     seriesID = 0;
     number = 0;
@@ -54,6 +55,7 @@ cTVDBEpisode::cTVDBEpisode(int ID, string language, string apiKey, cTVDBMirrors 
     seasonId = 0;
     lastUpdated = 0;
 }
+*/
 
 void cTVDBEpisode::ReadEpisode(void) {
     stringstream url;

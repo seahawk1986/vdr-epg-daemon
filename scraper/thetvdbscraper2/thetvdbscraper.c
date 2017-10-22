@@ -28,17 +28,17 @@ cTVDBSeries *cTVDBScraper::ScrapInitial(string seriesName) {
     cTVDBSeries *series = NULL;
     int seriesID = ReadSeries(seriesName);
     if (seriesID) {
-        series = new cTVDBSeries(seriesID, language, apiKey, mirrors);
+        series = new cTVDBSeries(seriesID, tvdbapi);
     }
     return series;    
 }
 
 cTVDBSeries *cTVDBScraper::GetSeries(int seriesID) {
-    return new cTVDBSeries(seriesID, language, apiKey, mirrors); 
+    return new cTVDBSeries(seriesID, tvdbapi); 
 }
 
-cTVDBEpisode *cTVDBScraper::GetEpisode(int episodeID) {
-    return new cTVDBEpisode(episodeID, language, apiKey, mirrors); 
+cTVDBEpisode *cTVDBScraper::GetEpisode(int episodeID, cTVDBApi &tvdbapi) {
+    return new cTVDBEpisode(episodeID, tvdbapi); 
 }
 
 bool cTVDBScraper::Connect(void) {

@@ -31,7 +31,6 @@ class cTVDBApi {
 private:
     string defaultLanguage;
     string apikey;
-    const string apiUrl = "https://api.thetvdb.com";
     string language;
     string fallback_language;
 
@@ -56,6 +55,7 @@ public:
     cTVDBApi();
     virtual ~cTVDBApi(void);
     // new api
+    const string apiUrl = "https://api.thetvdb.com";
     bool Login(std::string apiKey, std::string language="de");
     bool UpdateToken(const std::string &token=std::string());
     bool ParseJSON(const std::string &jsonString, json_t **result);

@@ -8,6 +8,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include "tvdbmirrors.h"
+#include "thetvdbapi.h"
 
 using namespace std; 
 
@@ -16,11 +17,50 @@ class cTVDBEpisode {
 private:
     string apiKey;
     cTVDBMirrors *mirrors;
+    cTVDBApi &tvdbapi;
     string language;
     void ParseXML(string xml);
 public:
-    cTVDBEpisode(void);
-    cTVDBEpisode(int ID, string language, string apiKey, cTVDBMirrors *mirrors);
+    cTVDBEpisode(cTVDBApi &tvdbapi)
+      : tvdbapi(tvdbapi) {
+        id = 0;
+        seriesID = 0;
+        number = 0;
+        season = 0;
+        combinedEpisode = 0;
+        combinedSeason = 0;
+        name = "";
+        firstAired = "";
+        guestStars = "";
+        overview = "";
+        rating = 0.0;
+        imageUrl = "";
+        width = 400;
+        height = 225;
+        imgFlag = 0;
+        seasonId = 0;
+        lastUpdated = 0;
+    }
+    cTVDBEpisode(int ID, cTVDBApi &tvdbapi)
+      : tvdbapi(tvdbapi) {
+        id = ID;
+        seriesID = 0;
+        number = 0;
+        season = 0;
+        combinedEpisode = 0;
+        combinedSeason = 0;
+        name = "";
+        firstAired = "";
+        guestStars = "";
+        overview = "";
+        rating = 0.0;
+        imageUrl = "";
+        width = 400;
+        height = 225;
+        imgFlag = 0;
+        seasonId = 0;
+        lastUpdated = 0;
+    }
     int id;
     int seriesID;
     int number;

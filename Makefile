@@ -56,10 +56,10 @@ OBJS += scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/
 OBJS += scraper/themoviedbscraper/moviedbactor.o
 
 TVDBOBJS += tools/fuzzy.o tools/stringhelpers.o scraper/thetvdbscraper2/thetvdbscraper.o
-TVDBOBJS += levenshtein.o
+TVDBOBJS += levenshtein.o scraper/thetvdbscraper2/thetvdbapi.o
 TVDBOBJS += scraper/thetvdbscraper2/tvdbseries.o scraper/thetvdbscraper2/tvdbmirrors.o
 TVDBOBJS += scraper/thetvdbscraper2/tvdbmedia.o scraper/thetvdbscraper2/tvdbactor.o
-TVDBOBJS += scraper/thetvdbscraper2/tvdbepisode.o scraper/thetvdbscraper2/thetvdbapi.o
+TVDBOBJS += scraper/thetvdbscraper2/tvdbepisode.o
 
 HTTPOBJS += epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpclient.o
 

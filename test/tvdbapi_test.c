@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <jansson.h>
+#include "../scraper/thetvdbscraper2/thetvdbscraper.h"
 #include "../levenshtein.h"
 #include "../lib/curl.h"
 #include "../tools/stringhelpers.h"
@@ -62,7 +63,7 @@ bool login(const string &apikey, string &token)
    headerlist = curl_slist_append(headerlist, "Content-Type: application/json");
 
    string data = "";
-   responseCode = curl.DoPost(login_url, login_data, &data, httpResponse, (string)"", headerlist);
+   responseCode = curl.DoPost(login_url, login_data, &data, httpResponse, headerlist);
    curl_slist_free_all(headerlist);
    if (responseCode) {
       return parseToken(data, token);
@@ -115,29 +116,11 @@ bool refreshToken(string &token)
 
 }
 
-int searchSeries(const string &token, const string &seriesName, string &jsonResult, const string &language)
+bool getSeries(const std::string &token, int seriesID, std::string &jsonResult, const std::string &language)
 {
-   int seriesID = 0;
-   stringstream url;
+   const std::string url(api_url + "/series/" + std::to_string(seriesID));
 
-   char* escName = curl.EscapeUrl(seriesName.c_str());
-   url << api_url << "/search/series?name=" << escName;
-   curl.Free(escName);
-
-   if (getRequest(token, url.str(), jsonResult, language)) {
-      cout << "Search Series by name got Series data: " << jsonResult << '\n';
-      return true;
-   } else {
-      return false;
-   }
-}
-
-bool getSeries(const string &token, int seriesID, string &jsonResult, const string &language)
-{
-   stringstream url;
-   url << api_url << "/series/" << seriesID;
-
-   if (getRequest(token, url.str(), jsonResult, language)) {
+   if (getRequest(token, url, jsonResult, language)) {
       //parseSeriesJSON(seriesJSON);
       cout << "Series data:\n" << jsonResult << '\n';
       return true;
@@ -306,16 +289,26 @@ int main(int argc, char *argv[])
 {
    string token = "";
    string apikey = "E9DBB94CA50832ED";
+   cTVDBScraper tvdbapi;
+
+   if (!tvdbapi.Login()) {
+       std:cout << "Login failed" << '\n';
+   return 1;
+   }
+
    /*
+   if (!tvdbapi.UpdateToken()) {
+       std::cout << "refreshing Token failed" << '\n';
+   return 1;
+   }
+   */
+       /*
    if (login(apikey, token)) {
       cout << "token: " << token << "\n";
    } else {
       cout << "login failed" << std::endl;
    }
    */
-   token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDgxNDQ0NjUsImlkIjoiVFZTY3JhcHBlciIsIm9yaWdfaWF0IjoxNTA4MDU4MDY1fQ.FX0bYJg2eOJ7O8J4hfodgmSwc3cz5c93-bV0TFB19NjOBTLbHNZDkB9axg30arU0IcnZShrX0ComEj_VVJ1ktcxqNBa4gLyoZMoUYj_UsZU-Q7VdeUorlNRH7FlhIRk8Yt3JJ7whvbY5g7OIUz25aezxF15a5Cby2AcFx2iDSIFn2atjbUKOuVClBXn5s7ZEH2T8o_yu-9VS4uiamGJCU2_WqHI8v-Gl8o9GVbD8nVTQPKeRaFpD9mstXQg62S9-BFMQXiVlGH-gkGrIQsunaffyrDbHURgQhfshFemJClZGXt0p1uXTmujt9fRNE_3DjZrb3UdwXYnm-2EZOfYlqw";
-   if (refreshToken(token))
-      cout << "new token: " << token << '\n';
 
    if (argc > 1) {
       searchArg = argv[1];
@@ -323,27 +316,21 @@ int main(int argc, char *argv[])
    } else {
       searchArg = "Mit Schirm, Charme und Melone";
    }
-        string jsonData;
-   if (!searchSeries(token, searchArg, jsonData)) {
+
+   int seriesID;
+   seriesID = tvdbapi.ReadSeries(searchArg);
+   if (seriesID == 0) {
       cout << "search failed" << '\n';
       return 1;
    }
-   json_auto_t *root;
-   cout << "Parsing json string:" << '\n' << jsonData << '\n';
-   bool success = parseJSON(jsonData, &root);
-   if (!success) {
-      cout << "error when parsing JSON string" << '\n';
-      return 1;
-   }
-   int seriesID;
-   seriesID = getSeriesID(&root, searchArg);
-        json_decref(root);
    cout << "SeriesID for " << searchArg << " is " << seriesID << '\n';
+   /*
    if (getSeries(token, seriesID, jsonData)) {
       string episodeArray;
       getEpisodes(token, seriesID, episodeArray);
       cout << "episoden:\n" << episodeArray << '\n';
    }
+   */
    return 0;
 }
 

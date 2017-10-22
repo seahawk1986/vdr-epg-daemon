@@ -55,11 +55,20 @@ OBJS += scraper/thetvdbscraper/tvdbepisode.o
 OBJS += scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/moviedbmovie.o
 OBJS += scraper/themoviedbscraper/moviedbactor.o
 
+TVDBOBJS += tools/fuzzy.o tools/stringhelpers.o scraper/thetvdbscraper2/thetvdbscraper.o
+TVDBOBJS += levenshtein.o
+TVDBOBJS += scraper/thetvdbscraper2/tvdbseries.o scraper/thetvdbscraper2/tvdbmirrors.o
+TVDBOBJS += scraper/thetvdbscraper2/tvdbmedia.o scraper/thetvdbscraper2/tvdbactor.o
+TVDBOBJS += scraper/thetvdbscraper2/tvdbepisode.o scraper/thetvdbscraper2/thetvdbapi.o
+
 HTTPOBJS += epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpclient.o
 
 # rules:
 
 all: hlib $(TARGET) $(HTTPTARGET) plugins lv
+
+tvdbapi: hlib $(TVDBOBJS)
+	$(CC) $(DEFINES) -rdynamic test/tvdbapi_test.c $(TVDBOBJS) -L scraper/thetvdbscraper2  $(DLIBS) -o test/tvdbapi_tester
 
 eptest: eptest.c episode.c
 	$(CC) $(DEFINES) eptest.c episode.c svdrpclient.c  -L./lib -lhorchi $(DLIBS) -o eptst
@@ -77,7 +86,7 @@ lv:
 	(cd epglv && $(MAKE))
 
 clean: clean-plugins
-	@-rm -f $(OBJS) $(HTTPOBJS) core* *~ */*~ *.so
+	@-rm -f $(OBJS) $(TVDBOBJS) $(HTTPOBJS) core* *~ */*~ *.so
 	@-rm -f scraper/themoviedbscraper/*~ scraper/themoviedbscraper/*~ scraper/thetvdbscraper/*~
 	(cd epglv; $(MAKE) clean)
 	rm -f $(TARGET) $(ARCHIVE).tgz

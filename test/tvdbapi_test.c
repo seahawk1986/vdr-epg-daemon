@@ -3,6 +3,7 @@
 #include <sstream>
 #include <jansson.h>
 #include "../scraper/thetvdbscraper2/thetvdbscraper.h"
+#include "../scraper/thetvdbscraper2/thetvdbapi.h"
 #include "../levenshtein.h"
 #include "../lib/curl.h"
 #include "../tools/stringhelpers.h"
@@ -289,7 +290,7 @@ int main(int argc, char *argv[])
 {
    string token = "";
    string apikey = "E9DBB94CA50832ED";
-   cTVDBScraper tvdbapi;
+   cTVDBApi tvdbapi(apikey, "de");
 
    if (!tvdbapi.Login()) {
        std:cout << "Login failed" << '\n';

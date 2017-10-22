@@ -11,6 +11,7 @@
 #include <libxml/tree.h>
 #include "tvdbmirrors.h"
 #include "tvdbseries.h"
+#include "thetvdbapi.h"
 
 using namespace std;
 
@@ -23,13 +24,14 @@ private:
     string apiUrl;
     string baseURL;
     string language;
+    cTVDBApi tvdbapi;
     cTVDBMirrors *mirrors;
     xmlDoc *SetXMLDoc(string xml);
     int ParseXML(string xml);
     bool ParseToken(const string &s);
     int GetSeriesID(std::string &seriesData, string &seriesName);
 public:
-    cTVDBScraper(std::string language="de");
+    cTVDBScraper(std::string language="de"); 
     virtual ~cTVDBScraper(void);
     bool Connect(void);
     // NEW API

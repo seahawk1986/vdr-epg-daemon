@@ -2,20 +2,18 @@
 
 using namespace std;
 
-cTVDBApi::cTVDBApi(const string &apikey, const string &language) {
-    this->apikey = apikey;
-    this->language = language;
-    cout << "APIKey: " << apikey << '\n';
-    apiUrl = "https://api.thetvdb.com";
+cTVDBApi::cTVDBApi() {
 }
 
 cTVDBApi::~cTVDBApi() {
 }
 
-bool cTVDBApi::Login(const std::string &apiKey)
+bool cTVDBApi::Login(const std::string apiKey, const string language)
 {
-   if (!apiKey.empty())
-       this->apikey = apiKey;
+  if (apiKey.empty() || language.empty())
+      return false;
+   this->apikey = apiKey;
+   this->language = language;
 
    string login_url = apiUrl + "/login";
    std::cout << "URL is: " << login_url << ", apikey is: " << this->apikey << '\n';
@@ -99,102 +97,6 @@ bool cTVDBApi::ParseJSON(const string &data, json_t **result)
    return true;
 }
 
-int cTVDBApi::ReadSeries(const string &seriesName) {
-   int seriesID = 0;
-   // OLD API
-   /*
-   stringstream url;
-   string seriesXML;
-   char* escUrl = curl.EscapeUrl(seriesName.c_str());
-
-   url << mirrors->GetMirrorXML() << "/api/GetSeries.php?seriesname=" << escUrl << "&language=" << language.c_str();
-   curl.Free(escUrl);
-
-   if (curl.GetUrl(url.str().c_str(), &seriesXML))
-       seriesID = ParseXML(seriesXML);
-   */
-   // NEW API
-   char* escName = curl.EscapeUrl(seriesName.c_str());
-   const std::string url = apiUrl + "/search/series?name=" + escName;
-   curl.Free(escName);
-
-   std::string jsonString;
-
-   if (!GetRequest(url.c_str(), jsonString, language))
-      return seriesID;
-
-   cout << "Search Series by name got Series data: " << jsonString << '\n';
-   seriesID = GetSeriesID(jsonString, language);
-   // TODO parse json string data
-   return seriesID;
-}
-
-int cTVDBApi::GetSeriesID(std::string &seriesData, string &seriesName)
-{
-   // return the series with the name nearest to seriesName
-   int seriesID = 0;
-   int lv_distance = 0;
-   int max_dist = 0;
-   json_auto_t *jsonSeriesData;
-   bool success = ParseJSON(seriesData, &jsonSeriesData);
-   const char *json_seriesName = NULL;
-   json_auto_t *json_data, *json_array, *json_field, *json_seriesName_field;
-
-   if (!json_is_object(jsonSeriesData)) {
-      cout << "got no json object at top level!" << '\n';
-      return seriesID;
-   }
-
-   json_array = json_object_get(jsonSeriesData, "data");
-
-   if (!json_array) {
-      cout << "error when fetching data" << '\n';
-      return seriesID;
-   }
-
-   size_t index;
-   json_auto_t *value;
-   int bestMatch = 100;
-   json_array_foreach(json_array, index, value) {
-      json_data = json_array_get(json_array, index);
-
-      if (!json_is_object(json_data)) {
-         cout << "error when fetcing element of array" << '\n';
-         continue;
-      }
-
-      json_seriesName_field = json_object_get(json_data, "seriesName");
-
-      if (!json_seriesName_field) {
-          cout << "error when fetching seriesName_field" << '\n';
-          cout << "data was " << json_dumps(json_data, 0) << '\n';
-      }
-
-      json_seriesName = json_string_value(json_seriesName_field);
-      if (!json_seriesName) {
-         cout << "error when fetching seriesName" << '\n';
-         continue;
-      }
-
-      lv_distance = lvDistance(seriesName, json_seriesName, 20, max_dist);
-      cout << "Levenshtein distance between " << seriesName << " and " << json_seriesName << " is " << lv_distance << '\n';
-
-      if (lv_distance < bestMatch) {
-         bestMatch = lv_distance;
-
-         json_field = json_object_get(json_data, "id");
-
-         if (!json_field) {
-            cout << "error when fetching id" << '\n';
-            continue;
-         }
-
-         seriesID = json_integer_value(json_field);
-      } 
-   }
-   return seriesID;
-}
-
 bool cTVDBApi::GetRequest(const std::string &url, std::string &jsonString, const std::string &lang)
 {
    // wrapper to handle get requests with the needed headers
@@ -216,4 +118,23 @@ bool cTVDBApi::GetRequest(const std::string &url, std::string &jsonString, const
    } else {
       return false;
    }
+}
+
+bool cTVDBApi::GetJSONRequest(const std::string &url, json_t **jsonData, const std::string &lang)
+{
+   string data;
+   bool res = GetRequest(url, data, lang);
+
+   if (!res) {
+      cout << "GetJSONRequest: GetRequest failed." << '\n';
+      return false;
+   }
+
+   res = ParseJSON(data, jsonData);
+   if (!res) {
+      cout << "ParseJSON failed." << '\n';
+      return false;
+   }
+
+   return true;
 }

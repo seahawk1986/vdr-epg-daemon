@@ -53,98 +53,12 @@ bool cTVDBScraper::Connect(void) {
     }
     // END OLD API
     // New API
-    ok = Login();
+    ok = tvdbapi.Login(apiKey, language);
     return ok;
 }
 
-bool cTVDBScraper::Login(const std::string &apiKey)
-{
-   if (!apiKey.empty())
-       this->apiKey = apiKey;
-
-   string login_url = apiUrl + "/login";
-   string login_data = "{\"apikey\": \"" + this->apiKey + "\"}";
-
-   struct curl_slist *headerlist = NULL;
-   headerlist = curl_slist_append(headerlist, "Accept: application/json");
-   headerlist = curl_slist_append(headerlist, "Content-Type: application/json");
-
-   std::string data;
-   long httpResponse = 0;
-   int responseCode = curl.DoPost(login_url.c_str(), login_data, &data, httpResponse, headerlist);
-   curl_slist_free_all(headerlist);
-
-   if (responseCode) {
-      if (httpResponse == 401) {
-          cout << "Login failed" << '\n';
-          return false;
-      }
-      return ParseToken(data);
-   } else {
-      cout << data << httpResponse << '\n' << data << '\n';
-      return false;
-   }
-}
-
-bool cTVDBScraper::UpdateToken(const std::string &token)
-{
-   if (!token.empty())
-      this->token = token;
-
-   const string url = apiUrl + "/refresh_token";
-   struct curl_slist *headerlist = NULL;
-   headerlist = curl_slist_append(headerlist, "Accept: application/json");
-   string auth_token = "Authorization: Bearer " + this->token;
-   headerlist = curl_slist_append(headerlist, auth_token.c_str());
-   string referrer = "";
-
-   string data = "";
-   int res = curl.GetUrl(url.c_str(), &data, referrer, headerlist);
-   curl_slist_free_all(headerlist);
-   if (res) {
-      // cout << "new token data: " << data << '\n';
-      return ParseToken(data);
-   } else {
-      cout << "something went wrong: " << data << referrer << '\n';
-      return false;
-   }
-}
-
-bool cTVDBScraper::ParseToken(const string &s)
-{
-   json_t *data, *value;
-   bool success = ParseJSON(s, &data);
-
-   if (!success || !json_is_object(data)) {
-      fprintf(stderr, "error: data structure is no object\n");
-      return false;
-   }
-
-   value = json_object_get(data, "token");
-
-   if (!json_is_string(value))
-      return false;
-
-   this->token = json_string_value(value);
-   cout << "new Token is" << token << '\n';
-   return true;
-}
-
-bool cTVDBScraper::ParseJSON(const string &data, json_t **result)
-{
-   json_error_t error;
-   *result = json_loads(data.c_str(), 0, &error);
-
-   if (!result) {
-      fprintf(stderr, "error parsing json string on line %d: %s", error.line, error.text);
-      return false;
-   }
-
-   return true;
-}
-
 int cTVDBScraper::GetServerTime(void) {
-    // OLD API - TODO: Read time from header
+    // OLD API - TODO: Read time from header of JSON Request
     string url = "http://thetvdb.com/api/Updates.php?type=none";
     string serverTimeXML;
     if (!curl.GetUrl(url.c_str(), &serverTimeXML)) {
@@ -222,43 +136,8 @@ bool cTVDBScraper::GetUpdatedSeriesandEpisodes(set<int> *updatedSeries, set<int>
     return true;
 }
 
-bool cTVDBScraper::GetRequest(const std::string &url, std::string &jsonString, const std::string &lang)
-{
-   // wrapper to handle get requests with the needed headers
-   struct curl_slist *headerlist = NULL;
-   headerlist = curl_slist_append(headerlist, "Accept: application/json");
-
-   string lang_opt = "Accept-Language: " + language;
-   headerlist = curl_slist_append(headerlist, lang_opt.c_str());
-
-   string auth_token = "Authorization: Bearer " + token;
-   headerlist = curl_slist_append(headerlist, auth_token.c_str());
-
-   int res = curl.GetUrl(url.c_str(), &jsonString, (string)"", headerlist);
-   curl_slist_free_all(headerlist);
-
-   if (res) {
-      // cout << "get request returned:\n" << jsonResult << '\n';
-      return true;
-   } else {
-      return false;
-   }
-}
-
 int cTVDBScraper::ReadSeries(const string &seriesName) {
    int seriesID = 0;
-   // OLD API
-   /*
-   stringstream url;
-   string seriesXML;
-   char* escUrl = curl.EscapeUrl(seriesName.c_str());
-
-   url << mirrors->GetMirrorXML() << "/api/GetSeries.php?seriesname=" << escUrl << "&language=" << language.c_str();
-   curl.Free(escUrl);
-
-   if (curl.GetUrl(url.str().c_str(), &seriesXML))
-       seriesID = ParseXML(seriesXML);
-   */
    // NEW API
    char* escName = curl.EscapeUrl(seriesName.c_str());
    const std::string url = apiUrl + "/search/series?name=" + escName;
@@ -266,12 +145,11 @@ int cTVDBScraper::ReadSeries(const string &seriesName) {
 
    std::string jsonString;
 
-   if (!GetRequest(url.c_str(), jsonString, language))
+   if (!tvdbapi.GetRequest(url.c_str(), jsonString, language))
       return seriesID;
 
    cout << "Search Series by name got Series data: " << jsonString << '\n';
    seriesID = GetSeriesID(jsonString, language);
-   // TODO parse json string data
    return seriesID;
 }
 
@@ -282,7 +160,7 @@ int cTVDBScraper::GetSeriesID(std::string &seriesData, string &seriesName)
    int lv_distance = 0;
    int max_dist = 0;
    json_auto_t *jsonSeriesData;
-   bool success = ParseJSON(seriesData, &jsonSeriesData);
+   bool success = tvdbapi.ParseJSON(seriesData, &jsonSeriesData);
    const char *json_seriesName = NULL;
    json_auto_t *json_data, *json_array, *json_field, *json_seriesName_field;
 

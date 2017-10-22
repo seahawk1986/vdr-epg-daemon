@@ -284,36 +284,33 @@ int cCurl::DoPost(const char *url, std::string *sOutput, const std::string &sRef
   }
 }
 
-int cCurl::DoPost(const char *url, const std::string &sPost, std::string *sOutput, long &httpCode, const std::string &sReferer, struct curl_slist *headerlist)
+int cCurl::DoPost(const char *url, const std::string &sPost, std::string *sOutput, long &httpCode, struct curl_slist *headerlist)
 {
   /* This function sends a string as post request with custom headers. 
    */
   sBuf="";
-  CURLcode res;
   init();
 
   curl_easy_setopt(handle, CURLOPT_URL, url);
   curl_easy_setopt(handle, CURLOPT_HTTPHEADER, headerlist); // add the header
   curl_easy_setopt(handle, CURLOPT_POSTFIELDS, sPost.c_str());
-
-  if (sReferer != "")
-     curl_easy_setopt(handle, CURLOPT_REFERER, sReferer.c_str());
+  //curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
 
   // Is the following command needed? init() already sets this...
   // curl_easy_setopt(handle, CURLOPT_WRITEDATA, 0); // Set option to write to string
 
-  res = curl_easy_perform(handle);
+  CURLcode res = curl_easy_perform(handle);
   curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &httpCode);
+
   if (res != CURLE_OK) {
      // We have an error here mate!
      *sOutput = "";
      tell(1, "Error: Getting URL failed; %s (%d); http code was (%ld) [%s]",
           curl_easy_strerror(res), res, httpCode, url);
      return false;
-  } else {
-     *sOutput = sBuf;
-     return true;
   }
+  *sOutput = sBuf;
+  return true;
 }
 
 int cCurl::SetCookieFile(char *filename)

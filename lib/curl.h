@@ -43,7 +43,7 @@ class cCurl
       int PostRaw(const char *url, const std::string &sPost, std::string *sOutput, const std::string &sReferer = "");
       int DoPost(const char *url, std::string *sOutput, const std::string &sReferer,
                  struct curl_httppost *formpost, struct curl_slist *headerlist);
-      int DoPost(const char *url, const std::string &sPost, std::string *sOutput, long &httpCode, const std::string &sReferer="", struct curl_slist *headerlist=NULL);
+      int DoPost(const char *url, const std::string &sPost, std::string *sOutput, long &httpCode, struct curl_slist *headerlist=NULL);
 
       char* EscapeUrl(const char *url);
       void Free(char* str);

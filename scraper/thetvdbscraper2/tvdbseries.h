@@ -38,6 +38,7 @@ private:
     void ParseEpisodes(json_t **data);
     void ParseXML(string xml);
     void ReadSeriesData(xmlDoc *doc, xmlNode *node);
+    void SetGenre(json_t **data, string &result);
 public:
     cTVDBSeries(int ID, cTVDBApi &tvdbapi)
       : tvdbapi(tvdbapi) {

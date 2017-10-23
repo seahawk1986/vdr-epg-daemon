@@ -210,6 +210,23 @@ bool cTVDBSeries::ParseSeries(json_t **data) {
    return true;
 }
 
+const void cTVDBSeries::SetGenre(json_t **data, string &result)
+{
+   json_auto_t *field;
+   field = json_object_get(*data, "genre");
+
+   if (json_array_size(field) == 0)
+      return;
+
+   size_t index;
+   json_auto_t *genre_element; 
+   json_array_foreach(*data, index, genre_element) {
+      genre.append("|");
+      genre.append(json_string_value(genre_element));
+   }
+   genre.append("|");
+}
+
 void cTVDBSeries::SetClassValue(const string &fieldName, json_t **data, string &result)
 {
    json_auto_t *field;

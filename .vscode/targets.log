@@ -1,0 +1,2104 @@
+make all test_tmdbactor --print-data-base --no-builtin-variables --no-builtin-rules --question
+(cd lib && make lib)
+ 
+# make[1]: Verzeichnis „/home/alexander/src/vdr-epg-daemon/lib“ wird betreten
+ 
+# GNU Make 4.2.1
+# Gebaut für x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# Lizenz GPLv3+: GNU GPL Version 3 oder später <http://gnu.org/licenses/gpl.html>
+# Dies ist freie Software: Sie können sie nach Belieben ändern und weiter verteilen.
+# Soweit es die Gesetze erlauben gibt es KEINE GARANTIE.
+ 
+
+# „Make“-Datenbank; erstellt am: Mon Apr  5 23:55:07 2021
+
+# Variablen
+
+# „override“-Anweisung
+GNUMAKEFLAGS := 
+# automatisch
+<D = $(patsubst %/,%,$(dir $<))
+# automatisch
+?F = $(notdir $?)
+# Makefile (aus „../Make.config“, Zeile 14)
+CONFDEST = $(DESTDIR)/etc/epgd
+# Umgebung
+DESKTOP_SESSION = ubuntu
+# Standard
+.SHELLFLAGS := -c
+# Umgebung
+XDG_SESSION_CLASS = user
+# Umgebung
+XDG_SESSION_TYPE = x11
+# Umgebung
+VSCODE_LOG_NATIVE = false
+# automatisch
+?D = $(patsubst %/,%,$(dir $?))
+# Umgebung
+IM_CONFIG_PHASE = 1
+# Makefile (aus „../Make.config“, Zeile 20)
+UPSTARTDEST = $(DESTDIR)/etc/init
+# automatisch
+@D = $(patsubst %/,%,$(dir $@))
+# Umgebung
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# Umgebung
+GDMSESSION = ubuntu
+# Umgebung
+XMODIFIERS = @im=ibus
+# Makefile
+CURDIR := /home/alexander/src/vdr-epg-daemon/lib
+# Makefile
+SHELL = /bin/sh
+# Makefile (aus „../Make.config“, Zeile 24)
+INIT_SYSTEM = systemd
+# Makefile (aus „../Make.config“, Zeile 11)
+CACHEDIR = /var/cache/epgd
+# Umgebung
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{},"_languagePackSupport":true}
+# Umgebung
+_ = /usr/share/code/code
+# Makefile (aus „Makefile“, Zeile 62)
+CFLAGS = $(shell $(PYTHON)-config --includes) -ggdb -fno-stack-protector -O0 -fPIC -Wreturn-type -Wall -Wextra -Wparentheses -Wformat -pedantic -Wno-long-long -Wunused-variable -Wunused-label -Wno-unused-result -Wunused-value -Wunused-function -Wno-variadic-macros -Wunused-local-typedefs -Wno-unused-parameter -Werror=format-security -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D__STDC_FORMAT_MACROS $(shell pkg-config --cflags libsystemd) -ggdb -O0 $(shell mysql_config --include)
+# Makefile (aus „../Make.config“, Zeile 41)
+doLink = $(CC) $(LFLAGS)
+# Umgebung
+JOURNAL_STREAM = 9:40425
+# Umgebung
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# Makefile (aus „Makefile“, Zeile 50)
+BASELIBS = $(shell $(PYTHON)-config --libs --embed) -lrt -lz -luuid $(shell mysql_config --libs_r) -lcurl $(shell xml2-config --libs) $(shell xslt-config --libs) $(shell pkg-config --libs libsystemd)
+# Makefile (aus „../Make.config“, Zeile 47)
+USELIBXML = 1
+# Makefile (aus „../Make.config“, Zeile 1)
+MAKEFILE_LIST :=  Makefile ../Make.config
+# automatisch
+@F = $(notdir $@)
+# Umgebung
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# Makefile (aus „../Make.config“, Zeile 16)
+DEBUG = 1
+# Umgebung
+USERNAME = alexander
+# Makefile (aus „../Make.config“, Zeile 111)
+CXXFLAGS = -std=c++14 -Wunused-but-set-variable -Wunused-but-set-parameter
+# Makefile (aus „Makefile“, Zeile 41)
+LIBOBJS = common.o configuration.o parameters.o thread.o config.o db.o epgservice.o dbdict.o json.o wol.o imgtools.o curl.o searchtimer.o python.o
+# Umgebung
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# Umgebung
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# Umgebung
+VSCODE_VERBOSE_LOGGING = true
+# Makefile (aus „Makefile“, Zeile 12)
+DEMO = demo
+# Umgebung
+MANAGERPID = 1820
+# Umgebung
+LESSOPEN = | /usr/bin/lesspipe %s
+# Umgebung
+VSCODE_CWD = /home/alexander
+# Makefile (aus „../Make.config“, Zeile 51)
+USEEPGS = 1
+# Standard
+MAKE_HOST := x86_64-pc-linux-gnu
+# Umgebung
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# Makefile (aus „../Make.config“, Zeile 70)
+SYSDLIB_209 = 1
+# Makefile (aus „../Make.config“, Zeile 10)
+BINDEST = $(PREFIX)/bin
+# Umgebung
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# Umgebung
+SESSION_MANAGER = local/alexander-desktop:@/tmp/.ICE-unix/2031,unix/alexander-desktop:/tmp/.ICE-unix/2031
+# Umgebung
+XDG_RUNTIME_DIR = /run/user/1000
+# Makefile (aus „../Make.config“, Zeile 48)
+USECURL = 1
+# Umgebung
+XDG_MENU_PREFIX = gnome-
+# Umgebung
+VSCODE_LOG_STACK = false
+# Makefile (aus „../Make.config“, Zeile 66)
+SYSDLIB_210 = 1
+# Umgebung
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=53238fdb-88be-4794-b6e1-3d2cab2bceb2&iid=53238fdb-88be-4794-b6e1-3d2cab2bceb2&sid=53238fdb-88be-4794-b6e1-3d2cab2bceb2","uploadToServer":true}
+# Umgebung
+INVOCATION_ID = 9ec5ee08d29f49029f136fcc20561ab2
+# Makefile (aus „Makefile“, Zeile 10)
+HLIB = -L. -lhorchi
+# Standard
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# Makefile (aus „Makefile“, Zeile 9)
+LIBTARGET = libhorchi
+# Umgebung
+LS_COLORS = 
+# Umgebung
+XDG_SESSION_DESKTOP = ubuntu
+# Umgebung
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# Umgebung
+GIO_LAUNCHED_DESKTOP_FILE_PID = 74534
+# automatisch
+%F = $(notdir $%)
+# Umgebung
+DISPLAY = :1
+# Umgebung
+VSCODE_PIPE_LOGGING = true
+# Umgebung
+PWD = /home/alexander/src/vdr-epg-daemon/lib
+# Makefile (aus „../Make.config“, Zeile 44)
+PLGSRCDIR = ./PLUGINS
+# Standard
+.LOADED := 
+# Umgebung
+SSH_AGENT_PID = 1996
+# Makefile (aus „../Make.config“, Zeile 40)
+doCompile = $(CC) -c $(CFLAGS) $(DEFINES)
+# Umgebung
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# Makefile (aus „../Make.config“, Zeile 25)
+INIT_AFTER = mysql.service
+# Umgebung
+GTK_MODULES = gail:atk-bridge
+# Makefile (aus „../Make.config“, Zeile 29)
+PYTHON = python3
+# Umgebung
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# Umgebung
+HOME = /home/alexander
+# Umgebung
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# Makefile (aus „Makefile“, Zeile 63)
+DEFINES = -D_GNU_SOURCE -DBINDEST='"$(BINDEST)"' -DTARGET='"$(TARGET)"' -DLOG_PREFIX='""' -DPLGDIR='"$(PLGDEST)"' $(USES) $(shell pkg-config libxml-2.0 --cflags) $(shell pkg-config libxslt --cflags) $(shell $(PYTHON)-config --includes) $(USES)
+# Umgebung
+LOGNAME = alexander
+# Umgebung
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# Makefile (aus „../Make.config“, Zeile 42)
+doLib = ar -rs
+# Makefile (aus „../Make.config“, Zeile 8)
+PREFIX = /usr/local
+# Makefile (aus „../Make.config“, Zeile 49)
+USEJPEG = 1
+# Umgebung
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# Umgebung
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatisch
+^D = $(patsubst %/,%,$(dir $^))
+# Makefile (aus „Makefile“, Zeile 13)
+TEST = tst
+# Umgebung
+MAKELEVEL := 1
+# Standard
+MAKE = $(MAKE_COMMAND)
+# Standard
+MAKECMDGOALS := lib
+# Umgebung
+QT_IM_MODULE = ibus
+# Umgebung
+SHLVL = 0
+# Makefile (aus „../Make.config“, Zeile 37)
+CC = g++
+# Umgebung
+GNOME_SHELL_SESSION_MODE = ubuntu
+# Umgebung
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e2689515-8c49-47e3-97b7-1003e49c34da.sock
+# Standard
+MAKE_VERSION := 4.2.1
+# Umgebung
+USER = alexander
+# Makefile
+.DEFAULT_GOAL := all
+# Umgebung
+XDG_CURRENT_DESKTOP = Unity
+# Makefile (aus „../Make.config“, Zeile 9)
+_BINDEST = $(DESTDIR)$(PREFIX)/bin
+# Umgebung
+DESTDIR = 
+# automatisch
+%D = $(patsubst %/,%,$(dir $%))
+# Makefile (aus „../Make.config“, Zeile 13)
+PLGDEST = $(PREFIX)/lib/epgd/plugins
+# Makefile (aus „../Make.config“, Zeile 19)
+SYSTEMDDEST = $(DESTDIR)/etc/systemd/system
+# Standard
+MAKE_COMMAND := make
+# Umgebung
+VSCODE_NODE_CACHED_DATA_DIR = /home/alexander/.config/Code/CachedData/c185983a683d14c396952dd432459097bc7f757f
+# Umgebung
+ 
+OLDPWD = /home/alexander/src/vdr-epg-daemon
+# Standard
+.VARIABLES := 
+# Makefile (aus „../Make.config“, Zeile 45)
+TMPDIR = /tmp
+# automatisch
+*F = $(notdir $*)
+# Umgebung
+VSCODE_IPC_HOOK = /run/user/1000/vscode-18a7b2bb-1.55.0-main.sock
+# Makefile
+MAKEFLAGS = pqrRw
+# Umgebung
+MFLAGS = -pqrRw
+# automatisch
+*D = $(patsubst %/,%,$(dir $*))
+# Umgebung
+BREAKPAD_DUMP_LOCATION = /home/alexander/.config/Code/exthost Crash Reports
+# automatisch
++D = $(patsubst %/,%,$(dir $+))
+# Makefile (aus „../Make.config“, Zeile 12)
+_PLGDEST = $(DESTDIR)$(PREFIX)/lib/epgd/plugins
+# automatisch
++F = $(notdir $+)
+# Umgebung
+QT_ACCESSIBILITY = 1
+# Makefile (aus „../Make.config“, Zeile 50)
+USEPYTHON = 1
+# „override“-Anweisung
+.SHELLSTATUS := 0
+# Standard
+MAKEFILES := 
+# Makefile (aus „../Make.config“, Zeile 15)
+HTTPDEST = $(DESTDIR)/var/epgd/www
+# automatisch
+<F = $(notdir $<)
+# Umgebung
+ELECTRON_RUN_AS_NODE = 1
+# Makefile (aus „../Make.config“, Zeile 63)
+SYSTEMD_VERSION_209 := 1
+# Makefile (aus „Makefile“, Zeile 95)
+HEADER = db.h common.h config.h dbdict.h
+# Makefile (aus „../Make.config“, Zeile 93)
+USES = -DUSEUUID -DUSEMD5 -DUSELIBXML -DUSELIBARCHIVE -DUSEJSON -DUSEGUNZIP -DSYSDWDIFO -DUSESYSD
+# Umgebung
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatisch
+^F = $(notdir $^)
+# Standard
+SUFFIXES := 
+# Makefile (aus „../Make.config“, Zeile 58)
+SYSD_NOTIFY = 1
+# Umgebung
+CHROME_DESKTOP = code-url-handler.desktop
+# Makefile (aus „../Make.config“, Zeile 62)
+SYSTEMD_VERSION_210 := 1
+# Umgebung
+WINDOWPATH = 2
+# Standard
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# Umgebung
+GJS_DEBUG_OUTPUT = stderr
+# Standard
+.RECIPEPREFIX := 
+# Makefile (aus „../Make.config“, Zeile 52)
+USEWOL = 1
+# Umgebung
+LANG = de_DE.UTF-8
+# Umgebung
+VSCODE_PID = 74534
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=142/1024=14%, Rehash=0, Kollisionen=37/27414%
+
+# Musterspezifische Variablenwerte
+
+# Keine musterspezifischen Variablenwerte.
+
+# Verzeichnisse
+
+# . (Gerät 2082, Inode 8392788): 51 Dateien, keine Unmöglichkeiten.
+
+# 51 Dateien, keine Unmöglichkeiten in 1 Verzeichnissen.
+
+# Implizite Regeln
+
+%.o: %.c
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# 1 implizite Regeln, 0 (0,0%) Terminal.
+
+# Dateien
+
+# Dies ist kein Ziel:
+curl.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+configuration.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+cppchk:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 85):
+	cppcheck --template="{file}:{line}:{severity}:{message}" --quiet --force *.c *.h
+
+epgservice.o: epgservice.c epgservice.c db.h common.h config.h dbdict.h epgservice.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „epgservice“
+#  Zuletzt geändert 2021-04-03 11:30:21.097062316
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+pytst.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+all: lib tst demo
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+common.o: common.c common.c db.h common.h config.h dbdict.h common.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „common“
+#  Zuletzt geändert 2021-04-03 11:30:17.085138957
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+ 
+
+# Dies ist kein Ziel:
+thread.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+curl.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+libhorchi.a: common.o configuration.o parameters.o thread.o config.o db.o epgservice.o dbdict.o json.o wol.o imgtools.o curl.o searchtimer.o python.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zuletzt geändert 2021-04-03 11:30:26.64895626
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 69):
+	@echo Building Lib ...
+	$(doLib) $@ $(LIBOBJS)
+
+# Dies ist kein Ziel:
+parameters.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+imgtools.o: imgtools.c imgtools.c db.h common.h config.h dbdict.h imgtools.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „imgtools“
+#  Zuletzt geändert 2021-04-03 11:30:23.773011198
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+demo: demo.o lib
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 76):
+	$(doLink) demo.o $(HLIB) -larchive -lcrypto $(BASELIBS) -o $@
+
+# Dies ist kein Ziel:
+wol.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+Makefile:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+thread.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+json.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+parameters.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+test.o: test.c db.h common.h config.h dbdict.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+wol.o: wol.c wol.c db.h common.h config.h dbdict.h wol.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „wol“
+#  Zuletzt geändert 2021-04-03 11:30:23.261020978
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+searchtimer.o: searchtimer.c searchtimer.c db.h common.h config.h dbdict.h searchtimer.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „searchtimer“
+#  Zuletzt geändert 2021-04-03 11:30:25.804972382
+#  Datei wurde aktualisiert.
+ 
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+python.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+epgservice.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+dbdict.o: dbdict.c dbdict.c db.h common.h config.h dbdict.h dbdict.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „dbdict“
+#  Zuletzt geändert 2021-04-03 11:30:22.00504497
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+json.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+common.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+imgtools.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+python.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+db.o: db.c db.c db.h common.h config.h dbdict.h db.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „db“
+#  Zuletzt geändert 2021-04-03 11:30:20.58907202
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+lib: libhorchi.a
+#  Befehlszeilenziel.
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Die Datei existiert nicht.
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+configuration.o: configuration.c configuration.c db.h common.h config.h dbdict.h configuration.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „configuration“
+#  Zuletzt geändert 2021-04-03 11:30:17.781125661
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+epgservice.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+imgtools.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+demo.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+.DEFAULT:
+ 
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+common.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+wol.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+curl.o: curl.c curl.c db.h common.h config.h dbdict.h curl.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „curl“
+#  Zuletzt geändert 2021-04-03 11:30:24.592995533
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+test.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+clean:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 82):
+	rm -f *.o *~ core $(TEST) $(DEMO) $(LIBTARGET).a
+
+# Dies ist kein Ziel:
+searchtimer.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+config.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+pytst.o: pytst.c db.h common.h config.h dbdict.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+pytst: pytst.o lib
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 79):
+	$(CC) pytst.o $(HLIB) -larchive -lcrypto $(BASELIBS) -o $@
+
+# Dies ist kein Ziel:
+dbdict.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+thread.o: thread.c thread.c db.h common.h config.h dbdict.h thread.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „thread“
+#  Zuletzt geändert 2021-04-03 11:30:19.049101438
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+tst: test.o lib
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 73):
+	$(doLink) test.o $(HLIB) -larchive -lcrypto $(BASELIBS) -o $@
+
+parameters.o: parameters.c parameters.c db.h common.h config.h dbdict.h parameters.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „parameters“
+#  Zuletzt geändert 2021-04-03 11:30:18.541111143
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+ 
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+searchtimer.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+db.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+config.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+configuration.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+dbdict.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+config.o: config.c config.c db.h common.h config.h dbdict.h config.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „config“
+#  Zuletzt geändert 2021-04-03 11:30:19.521092422
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+demo.o: demo.c db.h common.h config.h dbdict.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+json.o: json.c json.c db.h common.h config.h dbdict.h json.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „json“
+#  Zuletzt geändert 2021-04-03 11:30:22.769030376
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Dies ist kein Ziel:
+../Make.config:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-03 13:46:11.210685236
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+db.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+python.o: python.c python.c db.h common.h config.h dbdict.h python.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „python“
+#  Zuletzt geändert 2021-04-03 11:30:26.632956565
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 88):
+	@echo Compile "$(*F)" ...
+	$(doCompile) $(*F).c -o $@
+
+# Statistik der Hash-Tabelle für Dateien:
+# Auslastung=60/1024=6%, Rehash=0, Kollisionen=55/24323%
+# VPATH-Suchpfade
+
+# Keine „vpath“-Suchpfade.
+
+# Kein allgemeiner Suchpfad (Variable „VPATH“).
+
+# Puffer für strcache: 1 (0) / Zeichenketten = 82 / Speicher = 718 B / ø = 8 B
+# aktueller Puffer: Größe = 8162 B / benutzt = 718 B / Anzahl = 82 / ø = 8 B
+
+ 
+# Leistung von strcache: Suchen = 281 / Trefferrate = 70%
+# Statistik für Hashtabelle:
+# Auslastung=82/8192=1%, Rehash=0, Kollisionen=12/2814%
+# „Make“-Datenbank beendet am: Mon Apr  5 23:55:07 2021
+
+# make[1]: Verzeichnis „/home/alexander/src/vdr-epg-daemon/lib“ wird verlassen
+ 
+# GNU Make 4.2.1
+ 
+# Gebaut für x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# Lizenz GPLv3+: GNU GPL Version 3 oder später <http://gnu.org/licenses/gpl.html>
+# Dies ist freie Software: Sie können sie nach Belieben ändern und weiter verteilen.
+# Soweit es die Gesetze erlauben gibt es KEINE GARANTIE.
+
+# „Make“-Datenbank; erstellt am: Mon Apr  5 23:55:07 2021
+
+# Variablen
+
+# „override“-Anweisung
+GNUMAKEFLAGS := 
+# automatisch
+<D = $(patsubst %/,%,$(dir $<))
+# automatisch
+?F = $(notdir $?)
+# Makefile (aus „Make.config“, Zeile 14)
+CONFDEST = $(DESTDIR)/etc/epgd
+# Umgebung
+DESKTOP_SESSION = ubuntu
+# Standard
+.SHELLFLAGS := -c
+# Umgebung
+XDG_SESSION_CLASS = user
+# Makefile (aus „Makefile“, Zeile 26)
+LASTHIST = $(shell grep '^20[0-3][0-9]' $(HISTFILE) | head -1)
+# Umgebung
+XDG_SESSION_TYPE = x11
+# Umgebung
+VSCODE_LOG_NATIVE = false
+# Makefile (aus „Makefile“, Zeile 9)
+TARGET = epgd
+# automatisch
+?D = $(patsubst %/,%,$(dir $?))
+# Umgebung
+IM_CONFIG_PHASE = 1
+# Makefile (aus „Make.config“, Zeile 20)
+UPSTARTDEST = $(DESTDIR)/etc/init
+# automatisch
+@D = $(patsubst %/,%,$(dir $@))
+# Umgebung
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# Umgebung
+GDMSESSION = ubuntu
+# Umgebung
+XMODIFIERS = @im=ibus
+# Makefile
+CURDIR := /home/alexander/src/vdr-epg-daemon
+# Makefile
+SHELL = /bin/sh
+# Makefile (aus „Make.config“, Zeile 24)
+INIT_SYSTEM = systemd
+# Makefile (aus „Make.config“, Zeile 11)
+CACHEDIR = /var/cache/epgd
+# Umgebung
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{},"_languagePackSupport":true}
+# Umgebung
+_ = /usr/share/code/code
+# Makefile (aus „Makefile“, Zeile 21)
+CFLAGS = $(shell $(PYTHON)-config --includes) -ggdb -fno-stack-protector -O0 -fPIC -Wreturn-type -Wall -Wextra -Wparentheses -Wformat -pedantic -Wno-long-long -Wunused-variable -Wunused-label -Wno-unused-result -Wunused-value -Wunused-function -Wno-variadic-macros -Wunused-local-typedefs -Wno-unused-parameter -Werror=format-security -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D__STDC_FORMAT_MACROS $(shell mysql_config --include)
+# Makefile (aus „Make.config“, Zeile 41)
+doLink = $(CC) $(LFLAGS)
+# Umgebung
+JOURNAL_STREAM = 9:40425
+# Umgebung
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# Makefile (aus „Makefile“, Zeile 42)
+BASELIBS = $(shell $(PYTHON)-config --libs --embed) -lrt -lz -larchive -ldl -lcrypto -luuid $(shell mysql_config --libs_r) $(shell pkg-config --cflags --libs jansson) $(shell pkg-config --libs libsystemd)
+# Makefile (aus „Make.config“, Zeile 47)
+USELIBXML = 1
+# Makefile (aus „Make.config“, Zeile 1)
+MAKEFILE_LIST :=  Makefile Make.config
+# automatisch
+@F = $(notdir $@)
+# Umgebung
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# Makefile (aus „Make.config“, Zeile 16)
+DEBUG = 1
+# Umgebung
+USERNAME = alexander
+# Makefile (aus „Make.config“, Zeile 111)
+CXXFLAGS = -std=c++14 -Wunused-but-set-variable -Wunused-but-set-parameter
+# Umgebung
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# Umgebung
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# Makefile (aus „Makefile“, Zeile 23)
+VERSION = $(shell grep 'define _VERSION ' $(HISTFILE) | awk '{ print $$3 }' | sed -e 's/[";]//g')
+# Umgebung
+VSCODE_VERBOSE_LOGGING = true
+# Makefile (aus „Makefile“, Zeile 65)
+OBJS = main.o update.o plugin.o epgdconfig.o channelmap.o series.o svdrpclient.o levenshtein.o episode.o moviedbmanager.o scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/moviedbmovie.o scraper/themoviedbscraper/moviedbactor.o tvdbmanager.o scraper/themoviedbscraper/thetmdbscraper.o scraper/themoviedbscraper/tmdbseries.o scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o scraper/themoviedbscraper/tmdbactor.o scraper/themoviedbscraper/api_config.o tools/fuzzy.o tools/stringhelpers.o
+# Umgebung
+MANAGERPID = 1820
+# Umgebung
+LESSOPEN = | /usr/bin/lesspipe %s
+# Umgebung
+VSCODE_CWD = /home/alexander
+# Makefile (aus „Make.config“, Zeile 51)
+USEEPGS = 1
+# Standard
+MAKE_HOST := x86_64-pc-linux-gnu
+# Umgebung
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# Makefile (aus „Make.config“, Zeile 70)
+SYSDLIB_209 = 1
+# Makefile (aus „Make.config“, Zeile 10)
+BINDEST = $(PREFIX)/bin
+# Umgebung
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# Umgebung
+SESSION_MANAGER = local/alexander-desktop:@/tmp/.ICE-unix/2031,unix/alexander-desktop:/tmp/.ICE-unix/2031
+# Umgebung
+XDG_RUNTIME_DIR = /run/user/1000
+# Makefile (aus „Makefile“, Zeile 165)
+SCRHEADER = tools/stringhelpers.h lib/curl.h
+# Makefile (aus „Make.config“, Zeile 48)
+USECURL = 1
+# Makefile (aus „Makefile“, Zeile 27)
+LASTCOMMENT = $(subst |,\n,$(shell sed -n '/$(LASTHIST)/,/^ *$$/p' $(HISTFILE) | tr '\n' '|'))
+# Umgebung
+XDG_MENU_PREFIX = gnome-
+# Umgebung
+VSCODE_LOG_STACK = false
+# Makefile (aus „Make.config“, Zeile 66)
+SYSDLIB_210 = 1
+# Umgebung
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=53238fdb-88be-4794-b6e1-3d2cab2bceb2&iid=53238fdb-88be-4794-b6e1-3d2cab2bceb2&sid=53238fdb-88be-4794-b6e1-3d2cab2bceb2","uploadToServer":true}
+# Umgebung
+INVOCATION_ID = 9ec5ee08d29f49029f136fcc20561ab2
+# Makefile (aus „Makefile“, Zeile 18)
+HLIB = -L./lib -lhorchi
+# Standard
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# Umgebung
+LS_COLORS = 
+# Umgebung
+XDG_SESSION_DESKTOP = ubuntu
+# Umgebung
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# Umgebung
+GIO_LAUNCHED_DESKTOP_FILE_PID = 74534
+# automatisch
+%F = $(notdir $%)
+# Umgebung
+DISPLAY = :1
+# Makefile (aus „Makefile“, Zeile 20)
+HTTPLIBS = $(HLIB) -lmicrohttpd $(BASELIBS) -lcurl $(shell pkg-config libxml-2.0 --libs) $(shell pkg-config libxslt --libs) -lexslt -ljpeg $(shell pkg-config imlib2 --libs)
+# Umgebung
+VSCODE_PIPE_LOGGING = true
+# Umgebung
+PWD = /home/alexander/src/vdr-epg-daemon
+# Makefile (aus „Make.config“, Zeile 44)
+PLGSRCDIR = ./PLUGINS
+# Standard
+.LOADED := 
+# Umgebung
+SSH_AGENT_PID = 1996
+# Makefile (aus „Make.config“, Zeile 40)
+doCompile = $(CC) -c $(CFLAGS) $(DEFINES)
+# Umgebung
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# Makefile (aus „Make.config“, Zeile 25)
+INIT_AFTER = mysql.service
+# Umgebung
+GTK_MODULES = gail:atk-bridge
+# Makefile (aus „Make.config“, Zeile 29)
+PYTHON = python3
+# Umgebung
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# Umgebung
+HOME = /home/alexander
+# Makefile (aus „Makefile“, Zeile 67)
+HTTPOBJS = epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpclient.o
+# Umgebung
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# Makefile (aus „Makefile“, Zeile 37)
+DEFINES = -D_GNU_SOURCE -DBINDEST='"$(BINDEST)"' -DTARGET='"$(TARGET)"' -DLOG_PREFIX='""' -DPLGDIR='"$(PLGDEST)"' $(USES) $(shell pkg-config libxml-2.0 --cflags) $(shell pkg-config libxslt --cflags) $(shell $(PYTHON)-config --includes) -DGIT_REV='"$(GIT_REV)"'
+# Umgebung
+LOGNAME = alexander
+# Umgebung
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# Makefile (aus „Make.config“, Zeile 42)
+doLib = ar -rs
+# Makefile (aus „Make.config“, Zeile 8)
+PREFIX = /usr/local
+# Makefile (aus „Make.config“, Zeile 49)
+USEJPEG = 1
+# Umgebung
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# Umgebung
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatisch
+^D = $(patsubst %/,%,$(dir $^))
+# Umgebung
+MAKELEVEL := 0
+# Makefile (aus „Makefile“, Zeile 11)
+HISTFILE = "HISTORY.h"
+# Standard
+MAKE = $(MAKE_COMMAND)
+# Standard
+MAKECMDGOALS := all test_tmdbactor
+# Umgebung
+QT_IM_MODULE = ibus
+# Umgebung
+SHLVL = 0
+# Makefile (aus „Makefile“, Zeile 32)
+HLIBDEP = ./lib/libhorchi.a
+ 
+# Makefile (aus „Make.config“, Zeile 37)
+CC = g++
+# Umgebung
+GNOME_SHELL_SESSION_MODE = ubuntu
+# Umgebung
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e2689515-8c49-47e3-97b7-1003e49c34da.sock
+# Standard
+MAKE_VERSION := 4.2.1
+# Umgebung
+USER = alexander
+# Makefile
+.DEFAULT_GOAL := all
+# Umgebung
+XDG_CURRENT_DESKTOP = Unity
+# Makefile (aus „Makefile“, Zeile 28)
+LASTTAG = $(shell git describe --tags --abbrev=0)
+# Makefile (aus „Make.config“, Zeile 9)
+_BINDEST = $(DESTDIR)$(PREFIX)/bin
+# Makefile (aus „Makefile“, Zeile 34)
+DESTDIR := 
+# automatisch
+%D = $(patsubst %/,%,$(dir $%))
+# Makefile (aus „Make.config“, Zeile 13)
+PLGDEST = $(PREFIX)/lib/epgd/plugins
+# Makefile (aus „Make.config“, Zeile 19)
+SYSTEMDDEST = $(DESTDIR)/etc/systemd/system
+# Standard
+MAKE_COMMAND := make
+# Umgebung
+VSCODE_NODE_CACHED_DATA_DIR = /home/alexander/.config/Code/CachedData/c185983a683d14c396952dd432459097bc7f757f
+# Standard
+.VARIABLES := 
+# Makefile (aus „Make.config“, Zeile 45)
+TMPDIR = /tmp
+# automatisch
+*F = $(notdir $*)
+# Umgebung
+VSCODE_IPC_HOOK = /run/user/1000/vscode-18a7b2bb-1.55.0-main.sock
+# Makefile
+MAKEFLAGS = pqrR
+# Umgebung
+MFLAGS = -pqrR
+# automatisch
+*D = $(patsubst %/,%,$(dir $*))
+# Umgebung
+BREAKPAD_DUMP_LOCATION = /home/alexander/.config/Code/exthost Crash Reports
+# automatisch
++D = $(patsubst %/,%,$(dir $+))
+# Makefile (aus „Make.config“, Zeile 12)
+_PLGDEST = $(DESTDIR)$(PREFIX)/lib/epgd/plugins
+# automatisch
++F = $(notdir $+)
+# Umgebung
+QT_ACCESSIBILITY = 1
+# Makefile (aus „Make.config“, Zeile 50)
+USEPYTHON = 1
+# „override“-Anweisung
+.SHELLSTATUS := 0
+# Standard
+MAKEFILES := 
+# Makefile (aus „Make.config“, Zeile 15)
+HTTPDEST = $(DESTDIR)/var/epgd/www
+# Makefile (aus „Makefile“, Zeile 10)
+HTTPTARGET = epghttpd
+# automatisch
+<F = $(notdir $<)
+# Umgebung
+ELECTRON_RUN_AS_NODE = 1
+# Makefile (aus „Make.config“, Zeile 63)
+SYSTEMD_VERSION_209 := 1
+# Makefile (aus „Makefile“, Zeile 29)
+BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
+# Makefile (aus „Makefile“, Zeile 149)
+HEADER = lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
+# Makefile (aus „Make.config“, Zeile 93)
+USES = -DUSEUUID -DUSEMD5 -DUSELIBXML -DUSELIBARCHIVE -DUSEJSON -DUSEGUNZIP -DSYSDWDIFO -DUSESYSD
+# Umgebung
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# Makefile (aus „Makefile“, Zeile 19)
+DLIBS = $(HLIB) $(BASELIBS) -lcurl $(shell pkg-config libxml-2.0 --libs) $(shell pkg-config libxslt --libs) -lexslt
+# automatisch
+^F = $(notdir $^)
+# Standard
+SUFFIXES := 
+# Makefile (aus „Make.config“, Zeile 58)
+SYSD_NOTIFY = 1
+# Umgebung
+CHROME_DESKTOP = code-url-handler.desktop
+# Makefile (aus „Make.config“, Zeile 62)
+SYSTEMD_VERSION_210 := 1
+# Umgebung
+WINDOWPATH = 2
+# Standard
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# Umgebung
+GJS_DEBUG_OUTPUT = stderr
+# Standard
+.RECIPEPREFIX := 
+# Makefile (aus „Make.config“, Zeile 52)
+USEWOL = 1
+# Makefile (aus „Makefile“, Zeile 24)
+ARCHIVE = $(TARGET)-$(VERSION)
+# Umgebung
+LANG = de_DE.UTF-8
+# Makefile (aus „Makefile“, Zeile 30)
+GIT_REV = $(shell git describe --always 2>/dev/null)
+# Umgebung
+VSCODE_PID = 74534
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=153/1024=15%, Rehash=0, Kollisionen=52/40813%
+
+# Musterspezifische Variablenwerte
+
+# Keine musterspezifischen Variablenwerte.
+
+# Verzeichnisse
+
+# scraper/themoviedbscraper (Gerät 2082, Inode 8392828): Keine Dateien, keine Unmöglichkeiten bisher.
+# . (Gerät 2082, Inode 8266628): 69 Dateien, keine Unmöglichkeiten.
+# tools (Gerät 2082, Inode 8392862): Keine Dateien, keine Unmöglichkeiten bisher.
+
+# 69 Dateien, keine Unmöglichkeiten in 3 Verzeichnissen.
+
+# Implizite Regeln
+
+%.o: %.c
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# 1 implizite Regeln, 0 (0,0%) Terminal.
+
+# Dateien
+
+# Dies ist kein Ziel:
+svdrpclient.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.912332997
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+tests/test_tmdbactor.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-02 11:52:13.559324186
+#  Datei wurde aktualisiert.
+ 
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbseries.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/moviedbactors.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/moviedbactor.h scraper/themoviedbscraper/moviedbactor.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/tmdbmedia.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbmedia.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+tools/fuzzy.o: tools/fuzzy.h tools/fuzzy.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+clean-plugins:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 190):
+	@find $(PLGSRCDIR) -maxdepth 1 -type d -name "[a-z0-9]*" -exec \
+	    $(MAKE) \-\-no-print-directory -C {} clean \;
+
+install-epgd: hlib epgd epghttpd install-scripts install-config install-plugins
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 115):
+	install -D $(TARGET) $(_BINDEST)/
+
+# Dies ist kein Ziel:
+webdo.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+all: hlib epgd epghttpd plugins lv
+#  Befehlszeilenziel.
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Die Datei existiert nicht.
+#  Datei wurde aktualisiert.
+#  Eine Aktualisierung ist notwendig (-q ist angegeben).
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=0/32=0%, Rehash=0, Kollisionen=0/390%
+
+# Dies ist kein Ziel:
+tvdbmanager.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+lib/db.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbactor.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 16:41:07.679644107
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+channelmap.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.880333348
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/moviedbactor.o:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+git: commit push
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# „override“-Anweisung
+series.o: .SHELLSTATUS := 0
+series.o: series.c series.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h series.h levenshtein.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „series“
+#  Zuletzt geändert 2021-04-03 11:30:33.932817124
+#  Datei wurde aktualisiert.
+#  Eine Aktualisierung ist notwendig (-q ist angegeben).
+# automatisch
+# @ := series.o
+# automatisch
+# % := 
+# automatisch
+# * := series
+# automatisch
+# + := series.c series.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h series.h levenshtein.h
+# automatisch
+# | := 
+# automatisch
+# < := series.c
+# automatisch
+# ^ := series.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h levenshtein.h
+# automatisch
+# ? := series.c
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=9/32=28%, Rehash=0, Kollisionen=20/5040%
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+main.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+ 
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+eptest: eptest.c episode.c hlib
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 74):
+	$(CC) $(DEFINES) eptest.c episode.c svdrpclient.c  -L./lib -lhorchi $(DLIBS) -o eptst
+
+showv:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 284):
+	@echo "Git ($(BRANCH)):\\n  Version: $(LASTTAG) (tag)"
+	@echo "Local:"
+	@echo "  Version: $(VERSION)"
+	@echo "  Change:"
+	@echo -n "   $(LASTCOMMENT)"
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbseries.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+levenshtein.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbepisode.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+tools/stringhelpers.o: tools/stringhelpers.c tools/stringhelpers.h tools/stringhelpers.c
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „tools/stringhelpers“
+#  Zuletzt geändert 2021-04-05 23:14:39.894722055
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+episode.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+epghttpd: hlib epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpclient.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 89):
+	$(CC) -rdynamic $(HTTPOBJS) $(HTTPLIBS) -o $@
+
+# Dies ist kein Ziel:
+tvdbmanager.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+install-epglv:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 121):
+	(cd epglv; $(MAKE) install)
+
+commit: vcheck
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 279):
+	git commit -m "$(LASTCOMMENT)" -a
+
+# Dies ist kein Ziel:
+.SUFFIXES:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+lib/epgservice.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+webauth.o: webauth.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h httpd.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+Makefile:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 12:41:28.479445517
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbactor.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 12:03:42.375184529
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+update:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 293):
+	git pull
+	@make clean install
+	systemctrl restart epgd
+	systemctrl restart epghttpd
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/thetmdbscraper.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+ 
+update.o: update.c update.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „update“
+#  Zuletzt geändert 2021-04-05 23:04:30.48577131
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+epgd.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.884333303
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/api_config.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 16:39:42.857153728
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+install-config:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 218):
+	if ! test -d $(CONFDEST); then \
+	   mkdir -p $(CONFDEST); \
+	   chmod a+rx $(CONFDEST); \
+	fi
+	install --mode=644 -D ./configs/getupdflg.sql $(CONFDEST)
+	install --mode=644 -D ./configs/getcrosslvr.sql $(CONFDEST)
+	install --mode=644 -D ./configs/getlvrmin.sql $(CONFDEST)
+	install --mode=644 -D ./configs/mergeepg.sql $(CONFDEST)
+	install --mode=644 -D ./configs/reverseepg.sql $(CONFDEST)
+	install --mode=644 -D ./configs/thetvdbview.sql $(CONFDEST)
+	install --mode=644 -D ./configs/epg.dat $(CONFDEST)
+	for i in ./configs/eventsview*.sql; do\
+      install --mode=644 -D "$$i" $(CONFDEST)/; \
+	done;
+	if ! test -f $(CONFDEST)/epgd.conf; then \
+	   install --mode=644 -D ./configs/epgd.conf $(CONFDEST)/; \
+	fi
+	if ! test -f $(CONFDEST)/recording.py; then \
+	   install --mode=644 -D ./configs/recording.py $(CONFDEST)/; \
+	else \
+	   install --mode=644 -D ./configs/recording.py $(CONFDEST)/recording.py.dist; \
+	fi
+	if ! test -f $(CONFDEST)/channelmap.conf; then \
+	   install --mode=644 -D ./configs/channelmap.conf $(CONFDEST)/; \
+	fi
+
+# Dies ist kein Ziel:
+levenshtein.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+lib/common.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/api_config.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 13:36:58.966115999
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+install-scripts:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 206):
+	if ! test -d $(_BINDEST); then \
+		mkdir -p "$(_BINDEST)" \
+	   chmod a+rx $(_BINDEST); \
+	fi
+	install -D ./scripts/epgd-*[!~] $(_BINDEST)/
+	install -D ./scripts/epgh-*[!~] $(_BINDEST)/
+	install -D ./scripts/epgsearchdone.pl $(_BINDEST)/
+
+install-plugins: plugins
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 194):
+	mkdir -p "$(_PLGDEST)"
+	for i in ${PLGSRCDIR}/*/Makefile; do\
+       grep -q "PLUGIN.*=" "$$i" || continue;\
+	    i=`dirname $$i`;\
+	    (cd "$$i" && $(MAKE) install);\
+	done;
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbmedia.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+httpd.o: httpd.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h httpd.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+lib/epgservice.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+install-none:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+tools/fuzzy.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/moviedbmovie.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/moviedbmovie.h scraper/themoviedbscraper/moviedbmovie.c scraper/themoviedbscraper/moviedbactor.h tools/fuzzy.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tvdbepisode.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/thetmdbscraper.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+ 
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+moviedbmanager.o: tools/stringhelpers.h lib/curl.h moviedbmanager.h moviedbmanager.c lib/epgservice.h lib/epgservice.c lib/db.h lib/db.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+plugins:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 186):
+	@find $(PLGSRCDIR) -maxdepth 1 -type d -name "[a-z0-9]*" -exec \
+	    $(MAKE) \-\-no-print-directory -C {} \;
+
+scraper/themoviedbscraper/themoviedbscraper.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/themoviedbscraper.h scraper/themoviedbscraper/themoviedbscraper.c scraper/themoviedbscraper/moviedbmovie.h scraper/themoviedbscraper/moviedbactor.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/tmdbepisodes.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/tmdbepisode.h scraper/themoviedbscraper/tvdbepisode.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/moviedbactor.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+hlib:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Wurzel impliziter/statischer Muster: „“
+#  Die Datei existiert nicht.
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+# automatisch
+# @ := hlib
+# automatisch
+# % := 
+# automatisch
+# * := 
+# automatisch
+# + := 
+# automatisch
+# | := 
+# automatisch
+# < := 
+# automatisch
+# ^ := 
+# automatisch
+# ? := 
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=8/32=25%, Rehash=0, Kollisionen=2/1315%
+#  Auszuführende Regel (aus „Makefile“, Zeile 83):
+	(cd lib && $(MAKE) lib)
+
+# Dies ist kein Ziel:
+series.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 23:32:31.143131286
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+eptest.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+svdrpclient.o: svdrpclient.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h svdrpclient.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+install-epghttpd: install-http
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 118):
+	install -D $(HTTPTARGET) $(_BINDEST)/
+
+# Dies ist kein Ziel:
+tests/test_api_config.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbmedia.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+tools/stringhelpers.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 22:48:46.918427449
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+tools/fuzzy.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+install-upstart:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 126):
+	cat contrib/epgd.conf | sed s:"<BINDEST>":"$(BINDEST)":g | sed s:"<PLGDEST>":"$(PLGDEST)":g | install -C -D /dev/stdin $(UPSTARTDEST)/epgd.conf
+	chmod a+r $(UPSTARTDEST)/epgd.conf
+	cat contrib/epghttpd.conf | sed s:"<BINDEST>":"$(BINDEST)":g | install -C -D /dev/stdin $(UPSTARTDEST)/epghttpd.conf
+	chmod a+r $(UPSTARTDEST)/epghttpd.conf
+
+parsertest: epgd parsertest.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 77):
+	$(CC) -g -Og $(DEFINES) parsertest.c levenshtein.o epgdconfig.o tools/stringhelpers.o moviedbmanager.o scraper/themoviedbscraper/moviedbactor.o scraper/themoviedbscraper/moviedbmovie.o  scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/tmdbseries.o tools/fuzzy.o -o parsertest $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) $(mysql_config --libs_r) -lcrypto -larchive -lxslt -luuid
+
+# Dies ist kein Ziel:
+.DEFAULT:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+webtools.o: webtools.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h httpd.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+ 
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+epgdconfig.o: epgdconfig.c
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „epgdconfig“
+#  Zuletzt geändert 2021-04-03 11:30:31.3688661
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+httpd.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+plugin.o: plugin.c plugin.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „plugin“
+#  Zuletzt geändert 2021-04-03 11:30:30.840876185
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+webauth.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/moviedbactor.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+update.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 22:49:27.293680514
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+series.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.912332997
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+clean: clean-plugins
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 95):
+	@-rm -f $(OBJS) $(HTTPOBJS) core* *~ */*~ *.so
+	@-rm -f scraper/themoviedbscraper/*~ scraper/themoviedbscraper/*~ scraper/thetvdbscraper/*~
+	(cd epglv; $(MAKE) clean)
+	rm -f $(TARGET) $(ARCHIVE).tgz
+	rm -f $(HTTPTARGET) pytst
+	rm -f last.json eptst
+	(cd lib && $(MAKE) clean)
+
+scraper/themoviedbscraper/tmdbseries.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/tmdbseries.h scraper/themoviedbscraper/tmdbseries.c scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbactor.h scraper/themoviedbscraper/tmdbepisode.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+tools/stringhelpers.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-05 11:26:03.850222934
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/tmdbepisode.o:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+lib/config.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+test_tmdbseries: scraper/themoviedbscraper/tmdbseries.o tests/test_tmdbseries.c scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 258):
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_tmdbseries.c scraper/themoviedbscraper/tmdbseries.o scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o  tools/stringhelpers.o scraper/themoviedbscraper/tmdbactor.o scraper/themoviedbscraper/api_config.o epgdconfig.o -o tests/test_tmdbseries $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbseries
+
+dist: clean
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 104):
+	@-rm -rf $(TMPDIR)/$(ARCHIVE)
+	@mkdir $(TMPDIR)/$(ARCHIVE)
+	@cp -a * $(TMPDIR)/$(ARCHIVE)
+	@tar czf $(ARCHIVE).tgz -C $(TMPDIR) $(ARCHIVE)
+	@-rm -rf $(TMPDIR)/$(ARCHIVE)
+	@echo Distribution package created as $(ARCHIVE).tgz
+
+webdo.o: webdo.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h httpd.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+httpd.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+tvdbmanager.o: tools/stringhelpers.h lib/curl.h tvdbmanager.h tvdbmanager.c lib/epgservice.h lib/epgservice.c lib/db.h lib/db.c
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+webstore.o:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+install-http:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+ 
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 215):
+	(cd "http/" && make install)
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/moviedbmovie.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/tmdbactor.o: scraper/themoviedbscraper/tmdbactor.c tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/tmdbactor.h scraper/themoviedbscraper/tmdbactor.c
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „scraper/themoviedbscraper/tmdbactor“
+#  Zuletzt geändert 2021-04-05 16:41:27.727286299
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+epgd: hlib main.o update.o plugin.o epgdconfig.o channelmap.o series.o svdrpclient.o levenshtein.o episode.o moviedbmanager.o scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/moviedbmovie.o scraper/themoviedbscraper/moviedbactor.o tvdbmanager.o scraper/themoviedbscraper/thetmdbscraper.o scraper/themoviedbscraper/tmdbseries.o scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o scraper/themoviedbscraper/tmdbactor.o scraper/themoviedbscraper/api_config.o tools/fuzzy.o tools/stringhelpers.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zuletzt geändert 2021-04-05 23:18:30.162526908
+#  Datei wurde aktualisiert.
+#  Eine Aktualisierung ist notwendig (-q ist angegeben).
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=0/32=0%, Rehash=0, Kollisionen=0/340%
+#  Auszuführende Regel (aus „Makefile“, Zeile 86):
+	$(CC) -rdynamic $(OBJS) $(DLIBS) -o $@
+
+channelmap.o: channelmap.c channelmap.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „channelmap“
+#  Zuletzt geändert 2021-04-03 11:30:32.680841038
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+moviedbmanager.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+vcheck:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 266):
+	git fetch
+	if test "$(LASTTAG)" = "$(VERSION)"; then \
+		echo "Warning: tag/version '$(VERSION)' already exists, update HISTORY first. Aborting!"; \
+		exit 1; \
+	fi
+
+main.o: main.c main.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „main“
+#  Zuletzt geändert 2021-04-03 11:30:27.836933566
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/themoviedbscraper.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# „override“-Anweisung
+test_tmdbactor: .SHELLSTATUS := 0
+test_tmdbactor: scraper/themoviedbscraper/tmdbactor.o tests/test_tmdbactor.c tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+#  Befehlszeilenziel.
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Wurzel impliziter/statischer Muster: „“
+#  Die Datei existiert nicht.
+#  Datei wurde aktualisiert.
+#  Eine Aktualisierung ist notwendig (-q ist angegeben).
+# automatisch
+# @ := test_tmdbactor
+# automatisch
+# % := 
+# automatisch
+# * := 
+# automatisch
+# + := scraper/themoviedbscraper/tmdbactor.o tests/test_tmdbactor.c tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+# automatisch
+# | := 
+# automatisch
+# < := scraper/themoviedbscraper/tmdbactor.o
+# automatisch
+# ^ := scraper/themoviedbscraper/tmdbactor.o tests/test_tmdbactor.c tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+# automatisch
+# ? := scraper/themoviedbscraper/tmdbactor.o tests/test_tmdbactor.c tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+# Hashtabellen-Statistik für Variablen:
+# Auslastung=9/32=28%, Rehash=0, Kollisionen=41/9444%
+#  Auszuführende Regel (aus „Makefile“, Zeile 254):
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_tmdbactor.c -o tests/test_tmdbactor scraper/themoviedbscraper/tmdbactor.o epgdconfig.o tools/stringhelpers.o  $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbactor
+
+levenshtein.o: levenshtein.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h levenshtein.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+svdrpclient.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+lv:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 92):
+	(cd epglv && $(MAKE))
+
+episode.o: episode.c lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h levenshtein.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+ 
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+push: vcheck
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 273):
+	echo "tagging git with $(VERSION)"
+	git push
+	git tag $(VERSION)
+	git push --tags
+
+install-systemd:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 132):
+	cat contrib/epgd.service | sed s:"<BINDEST>":"$(BINDEST)":g | sed s:"<AFTER>":"$(INIT_AFTER)":g | sed s:"<PLGDEST>":"$(PLGDEST)":g | install --mode=644 -C -D /dev/stdin $(SYSTEMDDEST)/epgd.service
+	chmod a+r $(SYSTEMDDEST)/epgd.service
+	cat contrib/epghttpd.service | sed s:"<BINDEST>":"$(BINDEST)":g | install --mode=644 -C -D /dev/stdin $(SYSTEMDDEST)/epghttpd.service
+	chmod a+r $(SYSTEMDDEST)/epghttpd.service
+		systemctl daemon-reload
+
+api_test: scraper/themoviedbscraper/api_config.c tools/stringhelpers.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 80):
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) scraper/themoviedbscraper/api_config.c tools/stringhelpers.o scraper/themoviedbscraper/tmdbactor.o  -o api_config $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) -lcrypto -larchive -luuid
+
+test_tmdbapi_config: scraper/themoviedbscraper/api_config.o tests/test_api_config.c tools/stringhelpers.o epgdconfig.o
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 250):
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_api_config.c -o tests/test_tmdbapi_config scraper/themoviedbscraper/api_config.o epgdconfig.o tools/stringhelpers.o  $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbapi_config
+
+# Dies ist kein Ziel:
+tests/test_tmdbseries.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+parsertest.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+lib/curl.h:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+cppchk:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 141):
+	cppcheck --language=c++ --template="{file}:{line}:{severity}:{message}" --quiet --force *.c *.h \
+      scraper/thetvdbscraper/*.c scraper/thetvdbscraper/*.h scraper/themoviedbscraper/*.c scraper/themoviedbscraper/*.h \
+      tools/*.c tools/*.h
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/moviedbmovie.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+webtools.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+epgdconfig.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.884333303
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+Make.config:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-04-03 13:46:11.210685236
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+# Dies ist kein Ziel:
+moviedbmanager.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+plugin.c:
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Zuletzt geändert 2021-03-15 16:26:36.90833304
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+
+scraper/themoviedbscraper/thetmdbscraper.o: tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/thetmdbscraper.h scraper/themoviedbscraper/thetmdbscraper.c scraper/themoviedbscraper/tmdbseries.h scraper/themoviedbscraper/tmdbepisode.h scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbactor.h
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+upd: update
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Dies ist kein Ziel:
+scraper/themoviedbscraper/themoviedbscraper.h:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+scraper/themoviedbscraper/api_config.o: scraper/themoviedbscraper/api_config.c tools/stringhelpers.h lib/curl.h scraper/themoviedbscraper/api_config.h scraper/themoviedbscraper/api_config.c
+#  Die Suche nach impliziten Regeln wurde durchgeführt.
+#  Wurzel impliziter/statischer Muster: „scraper/themoviedbscraper/api_config“
+#  Zuletzt geändert 2021-04-05 16:40:27.628357816
+#  Datei wurde aktualisiert.
+#  Erfolgreich aktualisiert.
+#  Auszuführende Regel (aus „Make.config“, Zeile 115):
+	$(doCompile) -o $@ $<
+
+install: install-epgd install-epglv install-epghttpd
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+ 
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+#  Auszuführende Regel (aus „Makefile“, Zeile 112):
+	make install-$(INIT_SYSTEM)
+
+# Dies ist kein Ziel:
+lib/db.c:
+#  Die Suche nach impliziten Regeln wurde nicht durchgeführt.
+#  Zeit der letzten Änderung wurde nicht überprüft.
+#  Datei wurde nicht aktualisiert.
+
+# Statistik der Hash-Tabelle für Dateien:
+# Auslastung=123/1024=12%, Rehash=0, Kollisionen=26/4436%
+# VPATH-Suchpfade
+
+# Keine „vpath“-Suchpfade.
+
+# Kein allgemeiner Suchpfad (Variable „VPATH“).
+
+# Puffer für strcache: 1 (0) / Zeichenketten = 161 / Speicher = 2680 B / ø = 16 B
+# aktueller Puffer: Größe = 8162 B / benutzt = 2680 B / Anzahl = 161 / ø = 16 B
+
+# Leistung von strcache: Suchen = 482 / Trefferrate = 66%
+# Statistik für Hashtabelle:
+# Auslastung=161/8192=2%, Rehash=0, Kollisionen=15/4823%
+# „Make“-Datenbank beendet am: Mon Apr  5 23:55:07 2021
+
+ 

@@ -1,0 +1,83 @@
+{
+    "files.associations": {
+        "*.c": "cpp",
+        "*.h": "cpp",
+        "thetvdbapi.h": "cpp",
+        "curl.h": "cpp",
+        "memory_resource": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "set": "cpp",
+        "vector": "cpp",
+        "atomic": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "string": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp",
+        "typeinfo": "cpp",
+        "bit": "cpp",
+        "variant": "cpp"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "makefile.configurations": [
+        {
+            "name": "all",
+            "makeArgs": []
+        },
+        {
+            "name": "parser_test",
+            "makeArgs": ["parsertest"]
+        },
+        {
+            "name": "api_test",
+            "makeArgs": ["api_test"]
+        },
+        {
+            "name": "test_tmdbactor",
+            "makeArgs": ["test_tmdbactor"]
+        }
+    ]
+}

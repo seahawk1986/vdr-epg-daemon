@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/",
+                "${workspaceFolder}/lib/**",
+                "${workspaceFolder}/scraper/",
+                "${workspaceFolder}/tools/",
+                "/usr/include/**",
+                "/usr/include/c++/9/**",
+                "/usr/include/linux/**",
+                // "/usr/include/x86_64-linux-gnu/c++/9/**",
+                // "/usr/include/c++/9/backward/**",
+                // "/usr/lib/gcc/x86_64-linux-gnu/9/include/**",
+                "/usr/local/include/**",
+                "/usr/include/x86_64-linux-gnu/**",
+                "/usr/include/libxml2/**"
+            ],
+            "defines": [
+                "TARGET=\"epgd\"",
+                "USECURL",
+                "USEEPGS",
+                "USEGUNZIP",
+                "USEJPEG",
+                "USEJSON",
+                "USELIBARCHIVE",
+                "USELIBXML=1",
+                "USEMD5",
+                "USEPYTHON",
+                "USESYSD",
+                "USEUUID",
+                "USEWOL",
+                "LOG_PREFIX=epg"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

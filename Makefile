@@ -48,14 +48,21 @@ endif
 # object files
 
 OBJS += main.o update.o plugin.o epgdconfig.o channelmap.o series.o svdrpclient.o levenshtein.o episode.o
-OBJS += tvdbmanager.o moviedbmanager.o
 
-OBJS += tools/fuzzy.o tools/stringhelpers.o scraper/thetvdbscraper/thetvdbscraper.o
-OBJS += scraper/thetvdbscraper/tvdbseries.o scraper/thetvdbscraper/tvdbmirrors.o
-OBJS += scraper/thetvdbscraper/tvdbmedia.o scraper/thetvdbscraper/tvdbactor.o
-OBJS += scraper/thetvdbscraper/tvdbepisode.o
-OBJS += scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/moviedbmovie.o
+OBJS += moviedbmanager.o
+OBJS += scraper/themoviedbscraper/themoviedbscraper.o
+OBJS += scraper/themoviedbscraper/moviedbmovie.o
 OBJS += scraper/themoviedbscraper/moviedbactor.o
+
+OBJS += tvdbmanager.o
+OBJS += scraper/themoviedbscraper/thetmdbscraper.o
+OBJS += scraper/themoviedbscraper/tmdbseries.o
+OBJS += scraper/themoviedbscraper/tmdbepisode.o
+OBJS += scraper/themoviedbscraper/tmdbmedia.o
+OBJS += scraper/themoviedbscraper/tmdbactor.o
+OBJS += scraper/themoviedbscraper/api_config.o
+
+OBJS += tools/fuzzy.o tools/stringhelpers.o
 
 HTTPOBJS += epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpclient.o
 
@@ -63,8 +70,14 @@ HTTPOBJS += epgdconfig.o webstore.o webdo.o webauth.o webtools.o httpd.o svdrpcl
 
 all: hlib $(TARGET) $(HTTPTARGET) plugins lv
 
-eptest: eptest.c episode.c
+eptest: eptest.c episode.c hlib
 	$(CC) $(DEFINES) eptest.c episode.c svdrpclient.c  -L./lib -lhorchi $(DLIBS) -o eptst
+
+parsertest: $(TARGET) parsertest.c
+	$(CC) -g -Og $(DEFINES) parsertest.c levenshtein.o epgdconfig.o tools/stringhelpers.o moviedbmanager.o scraper/themoviedbscraper/moviedbactor.o scraper/themoviedbscraper/moviedbmovie.o  scraper/themoviedbscraper/themoviedbscraper.o scraper/themoviedbscraper/tmdbseries.o tools/fuzzy.o -o parsertest $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) $(mysql_config --libs_r) -lcrypto -larchive -lxslt -luuid
+
+api_test: scraper/themoviedbscraper/api_config.c tools/stringhelpers.o
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) scraper/themoviedbscraper/api_config.c tools/stringhelpers.o scraper/themoviedbscraper/tmdbactor.o  -o api_config $(HTTPLIBS) $(TOOLSLIB) $(DLIBS) -lcrypto -larchive -luuid
 
 hlib:
 	(cd lib && $(MAKE) lib)
@@ -135,12 +148,12 @@ cppchk:
 
 HEADER = lib/db.h lib/common.h lib/config.h epgd.h series.h svdrpclient.h lib/curl.h
 
-channelmap.o	 :  channelmap.c  	 $(HEADER)
-episode.o		 :  episode.c     	 $(HEADER) levenshtein.h
+channelmap.o	:  channelmap.c  	 $(HEADER)
+episode.o		:  episode.c     	 $(HEADER) levenshtein.h
 
-levenshtein.o   :  levenshtein.c 	 $(HEADER) levenshtein.h
-main.o			 :  main.c        	 $(HEADER)
-series.o		    :  series.c      	 $(HEADER) series.h levenshtein.h
+levenshtein.o	:  levenshtein.c 	 $(HEADER) levenshtein.h
+main.o			:  main.c        	 $(HEADER)
+series.o	    :  series.c      	 $(HEADER) series.h levenshtein.h
 svdrpclient.o   :  svdrpclient.c 	 $(HEADER) svdrpclient.h
 update.o        :  update.c      	 $(HEADER)
 plugin.o        :  plugin.c      	 $(HEADER)
@@ -153,18 +166,17 @@ SCRHEADER = tools/stringhelpers.h lib/curl.h
 
 tvdbmanager.o                                 : $(SCRHEADER) tvdbmanager.h tvdbmanager.c lib/epgservice.h lib/epgservice.c lib/db.h lib/db.c
 moviedbmanager.o                              : $(SCRHEADER) moviedbmanager.h moviedbmanager.c lib/epgservice.h lib/epgservice.c lib/db.h lib/db.c
-scraper/thetvdbscraper/thetvdbscraper.o       : $(SCRHEADER) scraper/thetvdbscraper/thetvdbscraper.h scraper/thetvdbscraper/thetvdbscraper.c scraper/thetvdbscraper/tvdbseries.h scraper/thetvdbscraper/tvdbmirrors.h
-scraper/thetvdbscraper/tvdbseries.o           : $(SCRHEADER) scraper/thetvdbscraper/tvdbseries.h scraper/thetvdbscraper/tvdbseries.c scraper/thetvdbscraper/tvdbmirrors.h scraper/thetvdbscraper/tvdbmedia.h scraper/thetvdbscraper/tvdbactor.h scraper/thetvdbscraper/tvdbepisode.h
-scraper/thetvdbscraper/tvdbmirrors.o          : $(SCRHEADER) scraper/thetvdbscraper/tvdbmirrors.h scraper/thetvdbscraper/tvdbmirrors.c
-scraper/thetvdbscraper/tvdbmedia.o            : $(SCRHEADER) scraper/thetvdbscraper/tvdbmedia.h scraper/thetvdbscraper/tvdbmedia.c scraper/thetvdbscraper/tvdbmirrors.h
-scraper/thetvdbscraper/tvdbactor.o            : $(SCRHEADER) scraper/thetvdbscraper/tvdbactor.h scraper/thetvdbscraper/tvdbactor.c scraper/thetvdbscraper/tvdbmirrors.h
-scraper/thetvdbscraper/tvdbepisodes.o         : $(SCRHEADER) scraper/thetvdbscraper/tvdbepisode.h scraper/thetvdbscraper/tvdbepisode.c scraper/thetvdbscraper/tvdbmirrors.h
+scraper/themoviedbscraper/thetmdbscraper.o       : $(SCRHEADER) scraper/themoviedbscraper/thetmdbscraper.h scraper/themoviedbscraper/thetmdbscraper.c scraper/themoviedbscraper/tmdbseries.h scraper/themoviedbscraper/tmdbepisode.h scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbactor.h
+scraper/themoviedbscraper/tmdbseries.o           : $(SCRHEADER) scraper/themoviedbscraper/tmdbseries.h scraper/themoviedbscraper/tmdbseries.c scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbactor.h scraper/themoviedbscraper/tmdbepisode.h
+scraper/themoviedbscraper/tmdbepisodes.o         : $(SCRHEADER) scraper/themoviedbscraper/tmdbepisode.h scraper/themoviedbscraper/tvdbepisode.c
+scraper/themoviedbscraper/tmdbactor.o            : $(SCRHEADER) scraper/themoviedbscraper/tmdbactor.h scraper/themoviedbscraper/tmdbactor.c
+scraper/themoviedbscraper/tmdbmedia.o            : $(SCRHEADER) scraper/themoviedbscraper/tmdbmedia.h scraper/themoviedbscraper/tmdbmedia.c
 scraper/themoviedbscraper/themoviedbscraper.o : $(SCRHEADER) scraper/themoviedbscraper/themoviedbscraper.h scraper/themoviedbscraper/themoviedbscraper.c scraper/themoviedbscraper/moviedbmovie.h scraper/themoviedbscraper/moviedbactor.h
 scraper/themoviedbscraper/moviedbmovie.o      : $(SCRHEADER) scraper/themoviedbscraper/moviedbmovie.h scraper/themoviedbscraper/moviedbmovie.c scraper/themoviedbscraper/moviedbactor.h tools/fuzzy.h
-scraper/themoviedbscraper/ moviedbactors.o    : $(SCRHEADER) scraper/themoviedbscraper/moviedbactor.h scraper/themoviedbscraper/moviedbactor.c
+scraper/themoviedbscraper/moviedbactors.o     : $(SCRHEADER) scraper/themoviedbscraper/moviedbactor.h scraper/themoviedbscraper/moviedbactor.c
+scraper/themoviedbscraper/api_config.o        : $(SCRHEADER) scraper/themoviedbscraper/api_config.h scraper/themoviedbscraper/api_config.c
 tools/fuzzy.o                                 : tools/fuzzy.h tools/fuzzy.c
 tools/stringhelpers.o                         : tools/stringhelpers.h tools/stringhelpers.c
-
 
 # ------------------------------------------------------
 # Plugins
@@ -229,6 +241,22 @@ install-config:
 	if ! test -f $(CONFDEST)/channelmap.conf; then \
 	   install --mode=644 -D ./configs/channelmap.conf $(CONFDEST)/; \
 	fi
+
+# ------------------------------------------------------
+# Tests
+# ------------------------------------------------------
+
+test_tmdbapi_config: scraper/themoviedbscraper/api_config.o tests/test_api_config.c tools/stringhelpers.o epgdconfig.o
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_api_config.c -o tests/test_tmdbapi_config scraper/themoviedbscraper/api_config.o epgdconfig.o tools/stringhelpers.o  $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbapi_config
+
+test_tmdbactor: scraper/themoviedbscraper/tmdbactor.o tests/test_tmdbactor.c tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_tmdbactor.c -o tests/test_tmdbactor scraper/themoviedbscraper/tmdbactor.o epgdconfig.o tools/stringhelpers.o  $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbactor
+    
+test_tmdbseries: scraper/themoviedbscraper/tmdbseries.o tests/test_tmdbseries.c scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o tools/stringhelpers.o scraper/themoviedbscraper/api_config.o epgdconfig.o
+	$(CC) $(CFLAGS) -g -Og $(DEFINES) tests/test_tmdbseries.c scraper/themoviedbscraper/tmdbseries.o scraper/themoviedbscraper/tmdbepisode.o scraper/themoviedbscraper/tmdbmedia.o  tools/stringhelpers.o scraper/themoviedbscraper/tmdbactor.o scraper/themoviedbscraper/api_config.o epgdconfig.o -o tests/test_tmdbseries $(BASELIBS) $(DLIBS) $(TOOLSLIB)
+	./tests/test_tmdbseries
 
 # ------------------------------------------------------
 # Git / Versioning / Tagging

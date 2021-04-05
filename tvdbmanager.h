@@ -16,11 +16,11 @@
 
 #include "epgdconfig.h"
 
-#include "scraper/thetvdbscraper/thetvdbscraper.h"
-#include "scraper/thetvdbscraper/tvdbseries.h"
-#include "scraper/thetvdbscraper/tvdbepisode.h"
-#include "scraper/thetvdbscraper/tvdbmedia.h"
-#include "scraper/thetvdbscraper/tvdbactor.h"
+#include "scraper/themoviedbscraper/thetmdbscraper.h"
+#include "scraper/themoviedbscraper/tmdbseries.h"
+#include "scraper/themoviedbscraper/tmdbepisode.h"
+#include "scraper/themoviedbscraper/tmdbmedia.h"
+#include "scraper/themoviedbscraper/tmdbactor.h"
 
 struct sSeriesResult {
     tEventId eventId;
@@ -36,20 +36,21 @@ struct sSeriesResult {
 
 class cTVDBManager {
 private:
+    std::shared_ptr<sApiData> config;
     int bytesDownloaded;
     int withutf8;
     string language;
     int serverTime;
     map<string, int> alreadyScraped;
-    cTVDBScraper *tvdbScraper;
+    std::unique_ptr<cTMDBScraper> tvdbScraper = nullptr;
     cDbConnection *connection;
-    cDbTable *tSeries;
-    cDbTable *tSeriesEpsiode;
-    cDbTable *tSeriesMedia;
-    cDbTable *tSeriesActor;
-    cDbTable *tEvents;
-    cDbTable *tEpisodes;
-    cDbTable *tRecordingList;
+    std::unique_ptr<cDbTable> tSeries;
+    std::unique_ptr<cDbTable> tSeriesEpsiode;
+    std::unique_ptr<cDbTable> tSeriesMedia;
+    std::unique_ptr<cDbTable> tSeriesActor;
+    std::unique_ptr<cDbTable> tEvents;
+    std::unique_ptr<cDbTable> tEpisodes;
+    std::unique_ptr<cDbTable> tRecordingList;
 
     enum mediaType {
          mtBanner1,
@@ -67,16 +68,18 @@ private:
     };
     int GetLastScrap(void);
     void UpdateScrapTS(void);
-    bool GetAllIDs(set<int> *IDs, cDbTable *table, const char* fname);
-    cTVDBSeries *ScrapSeries(string search);
-    cTVDBSeries *ScrapSeries(int seriesID);
-    void SaveSeries(cTVDBSeries *series);
-    void SaveSeriesBasics(cTVDBSeries *series);
-    void SaveSeriesMedia(cTVDBSeries *series);
-    bool SavePosterBannerFanart(int mediaType, cTVDBMedia *media, int seriesID);
-    void SaveSeriesEpisodes(cTVDBSeries *series);
-    void SaveSeriesEpisode(cTVDBEpisode *episode, int seriesID = 0);
-    void SaveSeriesActors(cTVDBSeries *series);
+    bool GetAllIDs(set<std::pair<int, int>> &IDs, std::unique_ptr<cDbTable> &table, const char* fname, const char* sname);
+    bool GetAllIDs(set<int> &IDs, std::unique_ptr<cDbTable> &table, const char* fname);
+    std::unique_ptr<cTMDBSeries> ScrapSeries(string search);
+    std::unique_ptr<cTMDBSeries> ScrapSeries(int seriesID);
+    void SaveSeries(std::unique_ptr<cTMDBSeries> &series);
+    void SaveSeriesBasics(std::unique_ptr<cTMDBSeries> &series);
+    void SaveSeriesMedia(std::unique_ptr<cTMDBSeries> &series);
+    template <typename T>
+    bool SavePosterBannerFanart(int mediaType, const std::unique_ptr<T> &media, int seriesID);
+    void SaveSeriesEpisodes(const std::unique_ptr<cTMDBSeries> &series);
+    void SaveSeriesEpisode(const std::unique_ptr<cTMDBEpisode> &episode, int seriesID = 0);
+    void SaveSeriesActors(const std::unique_ptr<cTMDBSeries> &series);
     bool LoadMedia(int seriesId, int seasonNumber, int episodeId, int actorId, int mediaType);
     bool ReloadImage(string url);
     int GetPicture(const char* url, MemoryStruct* data);

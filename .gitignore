@@ -4,6 +4,8 @@
 PLUGINS/
 lib/demo
 lib/tst
+tests/test_*
+!tests/*.*
 epglv/mysqlepglv.so
 epgd
 epghttpd

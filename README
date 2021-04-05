@@ -30,6 +30,7 @@ Starting epgd and init-Scripts
 Upgrade from older versions
 MySQL Hints
 Considerations
+TMDB as data source
 
 
 Description:
@@ -385,3 +386,7 @@ HOWTOs
 
 select starttimes from table timers:
    select from_unixtime(day), starttime, from_unixtime(_starttime) as 'event starttime', from_unixtime(day + ((starttime % 100) * 60) + ((starttime div 100) * 60 * 60)) as 'timer starttime' from timers;
+
+TMDB as data source
+-------------------
+epgd uses the TMDb API but is not endorsed or certified by TMDb. The Movie Database is used to request movie and tv series metadata.

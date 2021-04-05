@@ -31,8 +31,8 @@ bool cJsonNode::isNumber(void)   { return  obj && json_is_number(obj);  }
 bool cJsonNode::isString(void)   { return  obj && json_is_string(obj);  }
 bool cJsonNode::isDouble(void)   { return  obj && json_is_real(obj);    }
 bool cJsonNode::isArray(void)    { return  obj && json_is_array(obj);   }
-size_t cJsonNode::currentArrayIndex(void) { return idx; }
-size_t cJsonNode::arraySize(void){ return json_array_size(obj); }
+size_t cJsonNode::currentArrayIndex(void) const { return idx; }
+size_t cJsonNode::arraySize(void) const { return json_array_size(obj); }
 void cJsonNode::resetArrayIterator(void) { idx = 0; }
 
 
@@ -48,24 +48,24 @@ cJsonNode cJsonNode::operator[](const size_t index) {
     return json_array_get(obj, index);
 }
 
-cJsonNode cJsonNode::operator[](const char* name) {
+cJsonNode cJsonNode::operator[](const char* name) & {
     return json_object_get(obj, name);
 }
 
-cJsonNode cJsonNode::operator[](const char* name) const {
+cJsonNode cJsonNode::operator[](const char* name) const & {
     return json_object_get(obj, name);
 }
 
-cJsonNode cJsonNode::operator[](const std::string &name) {
+cJsonNode cJsonNode::operator[](const std::string &name) & {
     return json_object_get(obj, name.c_str());
 }
 
-cJsonNode cJsonNode::operator[](const std::string &name) const {
+cJsonNode cJsonNode::operator[](const std::string &name) const & {
     return json_object_get(obj, name.c_str());
 }
 
 
-std::vector<cJsonNode> cJsonNode::ArrayToVector(void) {
+std::vector<cJsonNode> cJsonNode::ArrayToVector(void) const {
     std::vector<cJsonNode> result;
     result.reserve(json_array_size(obj));
     size_t idx;
@@ -84,7 +84,7 @@ cJsonNode cJsonNode::getElementInArray(const size_t index) {
 json_t* cJsonNode::object(void)  { return obj; }
 
 
-json_t* cJsonNode::objectByName(const char* name) {
+json_t* cJsonNode::objectByName(const char* name) const {
     return json_object_get(obj, name);
 }
 
@@ -92,46 +92,47 @@ cJsonNode cJsonNode::nodeByName(const char* name) {
     return cJsonNode(objectByName(name), root);
 }
 
-int cJsonNode::intByName(const char* name) {
+int cJsonNode::intByName(const char* name) const {
     json_t* int_json = json_object_get(obj, name);
     int result = json_integer_value(int_json);
     return result;
 }
 
-std::string cJsonNode::stringByName(const char* name) {
+std::string cJsonNode::stringByName(const char* name) const {
     json_t* str_json = objectByName(name);
     auto content = json_string_value(str_json);
     std::string result{content ? content : std::string()};
     return result;
 }
-double cJsonNode::doubleByName(const char* name) {
+double cJsonNode::doubleByName(const char* name) const {
     json_t* double_json = objectByName(name);
     double result = json_real_value(double_json);
     return result;
 }
 
-double cJsonNode::doubleValue() { return json_number_value(obj);}
+double cJsonNode::doubleValue() const { return json_number_value(obj);}
 
-int cJsonNode::intValue() { return json_integer_value(obj); }
+int cJsonNode::intValue() const { return json_integer_value(obj); }
 
-std::string cJsonNode::stringValue() {
+std::string cJsonNode::stringValue() const {
          auto content = json_string_value(obj);
          return content ? content : std::string();
 }
 
-std::string cJsonNode::combine_jsonArrayStrings(const char* sep) {
+std::string cJsonNode::combine_jsonArrayStrings(const char* sep, const bool surround) {
     ostringstream result;
     size_t array_size = json_array_size(obj);
     size_t max_idx = array_size - 1;
+    size_t cnt = 0;
     if (json_is_array(obj) && array_size > 0) {
-        result << sep;
+        if (surround || cnt++ > 0) result << sep;
         size_t idx;
         json_t* element;
         json_array_foreach(obj, idx, element) {
             auto content = json_string_value(element);
             if (content) {
                 result << content;
-                if (idx < max_idx) result << sep;
+                if (idx < max_idx || surround) result << sep;
             }
         }
     }
@@ -173,70 +174,6 @@ int cJsonLoader::isObject()
 { 
    return obj && json_is_object(obj); 
 }
-
-// TODO: remove this block
-// std::string extractJsonString(const json_t *object, const char *key) {
-//         json_t* str_json = json_object_get(object, key);
-//         auto content = json_string_value(str_json);
-//         std::string result{content ? content : std::string()};
-//         return result;
-// }
-
-// int extractJsonInt(const json_t *object, const char *key) {
-//         json_t* int_json = json_object_get(object, key);
-//         int result = json_integer_value(int_json);
-//         return result;
-// }
-
-// double extractJsonDouble(const json_t *object, const char *key) {
-//         json_t* double_json = json_object_get(object, key);
-//         double result = json_real_value(double_json);
-//         return result;
-// }
-
-// std::vector<std::string> get_jsonArrayStrings(const json_t* object, const char* key) {
-//     std::vector<std::string> result;
-//     json_t* array = json_object_get(object, key);
-//     if (json_is_array(array)) {
-//         result.reserve(json_array_size((array)));
-//         size_t idx;
-//         json_t* element;
-//         json_array_foreach(object, idx, element) {
-//             auto content = json_string_value(element);
-//             result.emplace_back(std::string{content ? content : std::string()});
-//         }
-//     }
-//     return result;
-// }
-
-// std::string combine_jsonArrayStrings(const json_t* object, const char* key) {
-//     ostringstream result;
-//     result << "|";
-//     json_t* array = json_object_get(object, key);
-//     if (json_is_array(array)) {
-//         size_t idx;
-//         json_t* element;
-//         json_array_foreach(object, idx, element) {
-//             auto content = json_string_value(element);
-//             if (content) result << content << "|";
-//         }
-//     }
-//     return result.str();
-// }
-
-// std::vector<int> get_jsonArrayInts(const json_t* object, const char* key) {
-//     std::vector<int> result;
-//     json_t* array = json_object_get(object, key);
-//     if (json_is_array(array)) {
-//         result.reserve(json_array_size((array)));
-//         size_t idx;
-//         json_t* element;
-//         json_array_foreach(object, idx, element) {
-//             result.emplace_back(json_integer_value(element));
-//         }
-//     }
-//     return result;
-// }
 
 //replace all "search" with "replace" in "subject"
 string str_replace(const string& search, const string& replace, const string& subject) {

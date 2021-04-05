@@ -42,28 +42,29 @@ class cJsonNode
       bool isString(void);
       bool isDouble(void);
       bool isArray(void);
-      size_t currentArrayIndex(void);
-      size_t arraySize(void);
+      size_t currentArrayIndex(void) const;
+      size_t arraySize(void) const;
       void resetArrayIterator(void); 
       json_t* object(void);
-      json_t* objectByName(const char* name);
+      json_t* objectByName(const char* name) const;
       cJsonNode nodeByName(const char* name);
       cJsonNode operator[](const size_t index);
-      cJsonNode operator[](const char* name);
-      cJsonNode operator[](const char* name) const;
-      cJsonNode operator[](const std::string &name);
-      cJsonNode operator[](const std::string &name) const;
+      cJsonNode operator[](const char* name) &;
+      cJsonNode operator[](const char* name) const &;
+      cJsonNode operator[](const std::string &name)&;
+      cJsonNode operator[](const std::string &name) const &;
+      // cJsonNode operator[](const std::string &name) const;
       cJsonNode nextElementInArray();
-      std::vector<cJsonNode> ArrayToVector(void);
+      std::vector<cJsonNode> ArrayToVector(void) const;
 
       cJsonNode getElementInArray(const size_t index);
-      int intByName(const char* name);
-      std::string stringByName(const char* name);
-      double doubleByName(const char* name);
-      double doubleValue();
-      int intValue(); // returns zero on error
-      std::string stringValue();
-      std::string combine_jsonArrayStrings(const char* sep="|");
+      int intByName(const char* name) const;
+      std::string stringByName(const char* name) const;
+      double doubleByName(const char* name) const;
+      double doubleValue() const;
+      int intValue() const; // returns zero on error
+      std::string stringValue() const;
+      std::string combine_jsonArrayStrings(const char* sep="|", const bool surround=true);
       void addStringArrayToVector(std::vector<std::string> &result);
    protected:
       json_t* obj = nullptr;

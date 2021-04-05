@@ -26,13 +26,6 @@ cTMDBSeries::cTMDBSeries(const string &seriesName, std::shared_ptr<sApiData> con
 
 cTMDBSeries::cTMDBSeries(const cJsonNode &data, const std::shared_ptr<sApiData> config): _config(config) {
     ReadSeriesData(data);
-    // seriesID = data.intByName("id");
-    // name = data.stringByName("name");
-    // fanart = data.stringByName("backdrop_path");
-    // firstAired = data.stringByName("first_air_date");
-    // network = data["networks"].combine_jsonArrayStrings(",", false);
-
-
 }
 
 bool cTMDBSeries::ReadSeries(void) {

@@ -30,7 +30,7 @@ private:
     vector<std::unique_ptr<cTMDBPoster>> posters;
     vector<std::unique_ptr<cTMDBSeasonPoster>> seasonPosters;
     vector<std::unique_ptr<cTMDBBanner>> banners;
-    std::unordered_map<std::string, int> language_order { {"en", 1}, {"", 2} }; // peferred sort order
+    std::unordered_map<std::string, int> language_order { {"en", 1}, {"", 2} }; // preferred sort order
     int currentEpisode = 0;
     int currentActor = 0;
     int currentFanart = 0;
